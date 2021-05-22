@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Capstone Project</string>
+    <string name="start_driving">Start Driving</string>
+    <string name="about_us">About Us</string>
+    <string name="image_banner_home">Image Banner Home</string>
+    <string name="action_settings">settings</string>
+</resources>
