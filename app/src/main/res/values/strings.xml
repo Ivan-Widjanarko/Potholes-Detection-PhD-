@@ -11,4 +11,6 @@
     <string name="text_register">Register</string>
     <string name="sign_up_here">Don\'t have an account? Sign Up</string>
     <string name="sign_in_here">Already have an account? Sign In</string>
+    <string name="text_project_description">A 2021 Bangkit Program project in the form of an Android application that connects with the Raspberry Pi to detect potholes while driving and then sends the potholes data along with its location to JAKI.</string>
+    <string name="text_creator">Creator</string>
 </resources>

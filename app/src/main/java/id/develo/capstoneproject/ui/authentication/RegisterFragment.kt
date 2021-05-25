@@ -29,7 +29,7 @@ class RegisterFragment : Fragment() {
 
         binding.tvSignin.setOnClickListener {
             // Back to Login Page
-            parentFragmentManager.popBackStackImmediate()
+            parentFragmentManager.popBackStack()
         }
     }
 

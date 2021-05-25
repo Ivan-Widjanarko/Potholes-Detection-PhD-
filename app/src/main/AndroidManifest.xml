@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CapstoneProject">
-        <activity android:name=".ui.authentication.AuthActivity"></activity>
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".ui.about.AboutActivity" />
+        <activity android:name=".ui.authentication.AuthActivity" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

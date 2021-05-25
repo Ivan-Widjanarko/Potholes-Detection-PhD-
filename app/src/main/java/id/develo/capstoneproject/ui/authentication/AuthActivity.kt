@@ -16,6 +16,7 @@ class AuthActivity : AppCompatActivity() {
         if (fragment !is LoginFragment) {
             mfragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
                 .add(R.id.frame_container, mLoginFragment, LoginFragment::class.java.simpleName)
                 .commit()
         }

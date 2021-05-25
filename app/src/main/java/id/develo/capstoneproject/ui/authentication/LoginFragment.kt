@@ -1,13 +1,16 @@
 package id.develo.capstoneproject.ui.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import id.develo.capstoneproject.MainActivity
 import id.develo.capstoneproject.R
 import id.develo.capstoneproject.databinding.FragmentLoginBinding
+import id.develo.capstoneproject.ui.about.AboutActivity
 
 
 class LoginFragment : Fragment() {
@@ -28,6 +31,12 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnLogin.setOnClickListener {
+            Intent(activity, MainActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
         binding.tvSignup.setOnClickListener {
             // Move to Register Page
             moveToRegister()
@@ -38,6 +47,7 @@ class LoginFragment : Fragment() {
         val mRegisterFragment = RegisterFragment()
         val mFragmentManager = parentFragmentManager
         mFragmentManager.beginTransaction().apply {
+            setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.slide_out)
             replace(
                 R.id.frame_container,
                 mRegisterFragment,

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary_dark"
+    android:padding="16dp"
+    tools:context=".ui.about.AboutActivity">
+
+    <TextView
+        android:id="@+id/tv_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_project_description"
+        android:textAlignment="center"
+        android:textColor="@color/secondary_light"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_creator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_about"
+        android:layout_marginTop="8dp"
+        android:text="@string/text_creator"
+        android:textColor="@color/primary_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_creators"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_creator"
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/item_creator_layout" />
+
+</RelativeLayout>
