@@ -67,9 +67,13 @@ def main():
 
 @app.route('/testing')
 def testing():
-    conn = main()
+    try:
+        conn = main()
+    except:
+        return "error koneksi sama database"
+    
     with conn.cursor() as cursor:
-        query = "SELECT * FROM user {}".format("user")
+        query = "SELECT * FROM user"
         cursor.execute(query)
         results = cursor.fetchall()
         for row in results:
