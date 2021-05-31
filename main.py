@@ -90,8 +90,10 @@ def post(email, password, device_id):
         conn.close()
 
         return "User added"
-
-    except pymysql.Error as e:
+    
+    except pymysql.err.OperationalError as e:
+        conn.rollback()
+        conn.close()
         code, message = e.args
         return "{}, {}".format(code, message)
 
