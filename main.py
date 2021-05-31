@@ -64,7 +64,7 @@ def login(email, password):
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
-        if results == 1:
+        if results:
             return "Anda berhasil login"
         else:
             return "email belum terdaftar"
@@ -139,9 +139,12 @@ def get_data(user_id):
         """.format(user_id)
         cursor.execute(query)
         results = cursor.fetchall()
-    conn.close()
-    return "Data ditemukan"
-
+        conn.close()
+        if results:
+            return "data ditemukan"
+        else:
+            return "data tidak ditemukan"
+    
 
 
 if __name__ == '__main__':
