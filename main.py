@@ -72,7 +72,7 @@ def main():
 def testing():
     conn = conf()
     with conn.cursor() as cursor:
-        query = "SELECT * FROM user"
+        query = "SELECT * FROM user;"
         cursor.execute(query)
         results = cursor.fetchall()
         for row in results:
