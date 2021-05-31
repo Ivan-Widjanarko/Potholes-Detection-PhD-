@@ -31,10 +31,9 @@ def conf():
             cnx = pymysql.connect(user=db_user, password=db_password,
                               host=host, db=db_name)
         return cnx
+    
     except pymysql.MySQLError as e:
         print(e)
-        return "error"+e
-
 
 @app.route('/')
 def main():
@@ -72,9 +71,6 @@ def main():
 @app.route('/testing')
 def testing():
     conn = conf()
-    if "error" in conn:
-        return conn
-    
     with conn.cursor() as cursor:
         query = "SELECT * FROM user"
         cursor.execute(query)
