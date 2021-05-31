@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify, flash
+#from flask.wrappers import Request
 #from flaskext.mysql import MySQL
 import pymysql
 
@@ -55,19 +56,6 @@ def main():
 #     conn.close()
 #     return getUser
 
-# #post_user('/users/register/<string:email>/<string:password>/<int:device_id>')
-# @app.route('/users/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
-# def post_user(email, password, device_id):
-#     conn = main()
-#     with conn.cursor() as cursor:
-#         sql = "INSERT INTO data_table (email, password, device_id) VALUES(%s, %s, %s)"
-#         val = (email, password, device_id)
-#         cursor.execute(sql, val) #masukin ke dalam table database
-#     conn.commit()
-#     conn.close()
-#     flash('Email kamu berhasil terdaftar')
-
-
 @app.route('/testing')
 def testing():
     conn = conf()
@@ -79,6 +67,28 @@ def testing():
             email = row[1]
     conn.close()
     return email
+
+# #post_user('/users/register/<string:email>/<string:password>/<int:device_id>')
+# @app.route('/users/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
+# def post_user(email, password, device_id):
+#     conn = main()
+#     with conn.cursor() as cursor:
+#         sql = "INSERT INTO data_table (email, password, device_id) VALUES(%s, %s, %s)"
+#         val = (email, password, device_id)
+#         cursor.execute(sql, val) #masukin ke dalam table database
+#     conn.commit()
+#     conn.close()
+#     flash('Email kamu berhasil terdaftar')
+@app.route('/post/<int:id>/<string:nama>/<string:password>/<int:device_id>', methods=['POST'])
+def post(id, email, password, device_id):
+    conn = conf()
+    with conn.cursor() as cursor:
+        cursor.execute("INSERT INTO user (email, password, device_id) VALUES({}, {}, {}, {})".format(id, email, password, device_id)) #masukin ke dalam table database
+    conn.commit()
+    conn.close()
+
+    return "User added"
+
 
 if __name__ == '__main__':
     app.run()
