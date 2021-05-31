@@ -91,12 +91,11 @@ def post(email, password, device_id):
 
         return "User added"
     
-    except pymysql.err.OperationalError as e:
+    except pymysql.OperationalError as e:
         conn.rollback()
         conn.close()
         code, message = e.args
         return "{}, {}".format(code, message)
-
 
 if __name__ == '__main__':
     app.run()
