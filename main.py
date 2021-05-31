@@ -65,7 +65,7 @@ def login(email, password):
         results = cursor.fetchall()
         conn.close()
         if results == 1:
-            return results
+            return "Anda berhasil login"
         else:
             return "email belum terdaftar"
     
@@ -129,7 +129,7 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
 
 
 #get_data('/data/get/<int:device_id>')
-@app.route('/data/get/<int:user_id')
+@app.route('/data/get/<int:user_id>')
 def get_data(user_id):
     conn = conf()
     with conn.cursor() as cursor:
@@ -140,10 +140,9 @@ def get_data(user_id):
         cursor.execute(query)
         results = cursor.fetchall()
     conn.close()
-    return results
+    return "Data ditemukan"
 
 
 
 if __name__ == '__main__':
-
     app.run()
