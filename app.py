@@ -64,18 +64,21 @@ def post_user(email, password, device_id):
     conn.close()
     flash('Email kamu berhasil terdaftar')
 
+
 @app.route('/testing')
 def testing():
     conn = main()
     with conn.cursor() as cursor:
-        query = "SELECT * FROM user"
+        query = "SELECT * FROM user {}".format("user")
         cursor.execute(query)
         results = cursor.fetchall()
         for row in results:
             email = row[1]
-            print ("email = ", email)
     conn.close()
-    return pymysql.NULL
+    return email
+
+if __name__ == '__main__':
+    app.run()
 
 #post_dataimage('/')
 
