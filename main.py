@@ -91,7 +91,7 @@ def post(email, password, device_id):
 
         return "User added"
     
-    except pymysql.OperationalError as e:
+    except pymysql.err.IntegrityError as e:
         conn.rollback()
         conn.close()
         code, message = e.args
