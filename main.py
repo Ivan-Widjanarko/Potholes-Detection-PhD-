@@ -82,18 +82,23 @@ def testing():
 @app.route('/post/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
 def post(email, password, device_id):
     try:
-        conn = conf()
-        with conn.cursor() as cursor:
-            sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
-            cursor.execute(sql)
-        conn.commit()
-        conn.close()
+        try:
+            conn = conf()
+            with conn.cursor() as cursor:
+                sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
+                cursor.execute(sql)
+            conn.commit()
+            conn.close()
 
-        return "User added"
-    
-    except pymysql.err.IntegrityError as e:
-        conn.rollback()
-        conn.close()
+            return "User added"
+
+        except pymysql.err.IntegrityError as e:
+            conn.rollback()
+            conn.close()
+            code, message = e.args
+            return "{}, {}".format(code, message)
+            
+    except Exception as e:
         code, message = e.args
         return "{}, {}".format(code, message)
 
