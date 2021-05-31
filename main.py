@@ -91,9 +91,9 @@ def post(email, password, device_id):
 
         return "User added"
 
-    except pymysql.InternalError as e:
-        conn.rollback()
-        return 'Got error {!r}, errno is {}'.format(e, e.args[0])
+    except pymysql.Error as e:
+        code, message = e.args
+        return "{}, {}".format(code, message)
 
 
 if __name__ == '__main__':
