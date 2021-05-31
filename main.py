@@ -76,7 +76,7 @@ def testing():
         return conn
     
     with conn.cursor() as cursor:
-        query = "SELECT * FROM user"
+        query = "SELECT * FROM user;"
         cursor.execute(query)
         results = cursor.fetchall()
         for row in results:
