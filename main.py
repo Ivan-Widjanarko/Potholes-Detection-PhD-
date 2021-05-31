@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify, flash
 #from flask.wrappers import Request
-#from flaskext.mysql import MySQL
+# from flaskext.mysql import MySQL
 import pymysql
 
 
@@ -56,17 +56,20 @@ def main():
 #     conn.close()
 #     return getUser
 
-@app.route('/testing')
-def testing():
+@app.route('/user/login/<string:email>/<string:password>')
+def login(email, password):
     conn = conf()
     with conn.cursor() as cursor:
-        query = "SELECT * FROM user;"
+        query = "SELECT id FROM user WHERE email='{}' AND password='{}'".format(email, password)
         cursor.execute(query)
         results = cursor.fetchall()
-        for row in results:
-            email = row[1]
-    conn.close()
-    return email
+        conn.close()
+        if results == 1:
+            return results
+        else:
+            return "email belum terdaftar"
+    
+
 
 # #post_user('/users/register/<string:email>/<string:password>/<int:device_id>')
 # @app.route('/users/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
@@ -79,8 +82,8 @@ def testing():
 #     conn.commit()
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
-@app.route('/post/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
-def post(email, password, device_id):
+@app.route('/user/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
+def register_user(email, password, device_id):
     try:
         try:
             conn = conf()
@@ -95,20 +98,52 @@ def post(email, password, device_id):
         except pymysql.err.IntegrityError as e:
             conn.rollback()
             conn.close()
-            code, message = e.args
-            return "{}, {}".format(code, message)
-            
-    except Exception as e:
-        code, message = e.args
-        return "{}, {}".format(code, message)
+            return e.args[1]
 
-if __name__ == '__main__':
-    app.run()
+    except Exception as e:
+        return e.args[1]
+
+
+
+
+
 
 #post_dataimage('/')
 
 #get_dataimage('')
 
 #post_data('/data/send/<int:device_id>/<float:location>/<string:classification>/<string:url>/<string:time>')
+@app.route('/data/post/<int:device_id>/<float:latitude>/<float:longitude>/<string:hole_type>/<string:url_img>', methods=['POST'])
+def post_data(device_id, latitude, longitude, hole_type, url_img):
+    conn = conf()
+    with conn.cursor() as cursor:
+        sql = """
+        INSERT INTO data (user_id, latitude, longitude, hole_type, url_img)
+	    SELECT id, {}, {}, '{}', '{}' FROM user
+	    WHERE device_id = {}""".format(latitude, longitude, hole_type, url_img, device_id) #masukin ke dalam table database
+        cursor.execute(sql)
+    conn.commit()
+    conn.close()
+
+    return "Data added"
+
 
 #get_data('/data/get/<int:device_id>')
+@app.route('/data/get/<int:user_id')
+def get_data(user_id):
+    conn = conf()
+    with conn.cursor() as cursor:
+        query = """
+        SELECT latitude, longitude, hole_type, url_img FROM data
+	        WHERE user_id={}
+        """.format(user_id)
+        cursor.execute(query)
+        results = cursor.fetchall()
+    conn.close()
+    return results
+
+
+
+if __name__ == '__main__':
+
+    app.run()
