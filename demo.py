@@ -1,5 +1,4 @@
 import os
-from pprint import pprint
 from google.cloud import storage
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'ServiceKey_GoogleCloud.json'
