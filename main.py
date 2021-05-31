@@ -79,11 +79,11 @@ def testing():
 #     conn.commit()
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
-@app.route('/post/<int:id>/<string:nama>/<string:password>/<int:device_id>', methods=['POST'])
-def post(id, email, password, device_id):
+@app.route('/post/<string:nama>/<string:password>/<int:device_id>', methods=['POST'])
+def post(email, password, device_id):
     conn = conf()
     with conn.cursor() as cursor:
-        sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', '{}')".format(email, password, device_id) #masukin ke dalam table database
+        sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
         cursor.execute(sql)
     conn.commit()
     conn.close()
