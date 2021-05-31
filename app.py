@@ -1,11 +1,11 @@
 import os
 from flask import Flask, jsonify, flash
-from flaskext.mysql import MySQL
+#from flaskext.mysql import MySQL
 import pymysql
 
 
 app = Flask(__name__)
-mysql = MySQL()
+#mysql = MySQL()
 
 #MySQL configuration
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -13,8 +13,7 @@ db_password = os.environ.get('CLOUD_SQL_PASSWORD')
 db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
-# @app.route('/')
-def main():
+def conf():
     # When deployed to App Engine, the `GAE_ENV` environment variable will be
     # set to `standard`
     try:
@@ -31,10 +30,15 @@ def main():
             host = '127.0.0.1'
             cnx = pymysql.connect(user=db_user, password=db_password,
                               host=host, db=db_name)
+        return cnx
     except pymysql.MySQLError as e:
         print(e)
+        return "error"+e
 
-    return cnx
+
+@app.route('/')
+def main():
+    return 'halo'
 
 # #get_user('/users/<string:email>/<string:password>')
 # @app.route('/users/<string:email>/<string:password>')
@@ -67,7 +71,10 @@ def main():
 
 @app.route('/testing')
 def testing():
-    conn = main()
+    conn = conf()
+    if "error" in conn:
+        return conn
+    
     with conn.cursor() as cursor:
         query = "SELECT * FROM user"
         cursor.execute(query)
