@@ -79,7 +79,7 @@ def testing():
 #     conn.commit()
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
-@app.route('/post/<string:nama>/<string:password>/<int:device_id>', methods=['POST'])
+@app.route('/post/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
 def post(email, password, device_id):
     conn = conf()
     with conn.cursor() as cursor:
