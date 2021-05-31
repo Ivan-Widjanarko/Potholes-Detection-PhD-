@@ -83,7 +83,8 @@ def testing():
 def post(id, email, password, device_id):
     conn = conf()
     with conn.cursor() as cursor:
-        cursor.execute("INSERT INTO user (email, password, device_id) VALUES({}, {}, {}, {})".format(id, email, password, device_id)) #masukin ke dalam table database
+        sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', '{}')".format(email, password, device_id) #masukin ke dalam table database
+        cursor.execute(sql)
     conn.commit()
     conn.close()
 
