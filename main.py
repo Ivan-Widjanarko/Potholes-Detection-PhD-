@@ -81,14 +81,19 @@ def testing():
 #     flash('Email kamu berhasil terdaftar')
 @app.route('/post/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
 def post(email, password, device_id):
-    conn = conf()
-    with conn.cursor() as cursor:
-        sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
-        cursor.execute(sql)
-    conn.commit()
-    conn.close()
+    try:
+        conn = conf()
+        with conn.cursor() as cursor:
+            sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
+            cursor.execute(sql)
+        conn.commit()
+        conn.close()
 
-    return "User added"
+        return "User added"
+
+    except pymysql.InternalError as e:
+        conn.rollback()
+        return 'Got error {!r}, errno is {}'.format(e, e.args[0])
 
 
 if __name__ == '__main__':
