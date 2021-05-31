@@ -14,27 +14,27 @@ db_name = os.environ.get('CLOUD_SQL_DATABASE_NAME')
 db_connection_name = os.environ.get('CLOUD_SQL_CONNECTION_NAME')
 
 # @app.route('/')
-# def main():
-#     # When deployed to App Engine, the `GAE_ENV` environment variable will be
-#     # set to `standard`
-#     try:
-#         if os.environ.get('GAE_ENV') == 'standard':
-#             # If deployed, use the local socket interface for accessing Cloud SQL
-#             unix_socket = '/cloudsql/{}'.format(db_connection_name)
-#             cnx = pymysql.connect(user=db_user, password=db_password,
-#                               unix_socket=unix_socket, db=db_name)
-#         else:
-#             # If running locally, use the TCP connections instead
-#             # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
-#             # so that your application can use 127.0.0.1:3306 to connect to your
-#             # Cloud SQL instance
-#             host = '127.0.0.1'
-#             cnx = pymysql.connect(user=db_user, password=db_password,
-#                               host=host, db=db_name)
-#     except pymysql.MySQLError as e:
-#         print(e)
+def main():
+    # When deployed to App Engine, the `GAE_ENV` environment variable will be
+    # set to `standard`
+    try:
+        if os.environ.get('GAE_ENV') == 'standard':
+            # If deployed, use the local socket interface for accessing Cloud SQL
+            unix_socket = '/cloudsql/{}'.format(db_connection_name)
+            cnx = pymysql.connect(user=db_user, password=db_password,
+                              unix_socket=unix_socket, db=db_name)
+        else:
+            # If running locally, use the TCP connections instead
+            # Set up Cloud SQL Proxy (cloud.google.com/sql/docs/mysql/sql-proxy)
+            # so that your application can use 127.0.0.1:3306 to connect to your
+            # Cloud SQL instance
+            host = '127.0.0.1'
+            cnx = pymysql.connect(user=db_user, password=db_password,
+                              host=host, db=db_name)
+    except pymysql.MySQLError as e:
+        print(e)
 
-#     return cnx
+    return cnx
 
 # #get_user('/users/<string:email>/<string:password>')
 # @app.route('/users/<string:email>/<string:password>')
