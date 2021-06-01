@@ -81,7 +81,7 @@ def login(email, password):
         query = "SELECT * FROM user WHERE email='{}' AND password='{}'".format(email, password)
         cursor.execute(query)
         results = cursor.fetchall()
-        messages = {'id':results[0],'email':results[1],'password':results[2],'device_id':results[3]}
+        messages = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3]}
         conn.close()
         if results:
             return jsonify(messages)
@@ -170,7 +170,7 @@ def get_data(user_id):
         query = f"SELECT * FROM data WHERE user_id={user_id}"
         cursor.execute(query)
         results = cursor.fetchall()
-        messages = {'id':results[0],'user_id':results[1],'latitude':results[2],'longitude':results[3],'hole_type':results[4],'url_img':results[5]}
+        messages = {'id':results[0][0],'user_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
         conn.close()
         if results:
             return jsonify(messages)
