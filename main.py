@@ -159,18 +159,18 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
 
 
 #get_data('/data/get/<int:device_id>')
-@app.route('/data/get/<int:user_id>')
-def get_data(user_id):
+@app.route('/data/get/<int:device_id')
+def get_data(device_id):
     conn = conf()
     with conn.cursor() as cursor:
         # query = """
         # SELECT latitude, longitude, hole_type, url_img FROM data
 	    #     WHERE user_id={}
         # """.format(user_id)
-        query = f"SELECT * FROM data WHERE user_id={user_id}"
+        query = f"SELECT * FROM data WHERE device_id={device_id}"
         cursor.execute(query)
         results = cursor.fetchall()
-        messages = {'id':results[0][0],'user_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
+        messages = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
         conn.close()
         if results:
             return jsonify(messages)
