@@ -82,10 +82,10 @@ def login(email, password):
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
-        if query > 0:
+        if results:
             return jsonify(results)
         else:
-            return jsonify(message="Account has not been registered!")
+            return jsonify(message="Failed to login")
     
 # for user in data.query.filter(User.id.in_(ids)).all():
 #     if current_user.id == user.id:
