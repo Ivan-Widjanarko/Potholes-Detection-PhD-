@@ -31,7 +31,6 @@ if __name__ == '__main__':
     fig = plt.gcf()
     fig.canvas.set_window_title('Object Detection')
     fig.suptitle('Detecting')
-    #ada detecting, detected, sama pending
     ax = plt.gca()
     ax.set_axis_off()
     tmp = np.zeros(input_size + [3], np.uint8)
@@ -43,8 +42,10 @@ if __name__ == '__main__':
             stream = np.empty((480, 640, 3), dtype=np.uint8)
             camera.capture(stream, 'rgb')
             
-            image = load_image(stream)
+            image = load_image(stream, (224, 224))
+            image = image.astype('float32')
             boxes, scores, classes = detector.detect(image, args.confidence)
+            image = image.astype('uint8')
             for label, score in zip(classes, scores):
                 print(label, score)
             

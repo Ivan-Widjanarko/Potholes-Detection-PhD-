@@ -22,10 +22,20 @@ class ObjectDetectorLite:
         self.interpreter.invoke()
         
         # get results
+        #print()
+        #print(self.interpreter.get_tensor(self.output_details[0]['index']))
+        #print(self.interpreter.get_tensor(self.output_details[0]['shape'][0]))
+        #print()
         boxes = self.interpreter.get_tensor(self.output_details[0]['index'])
-        classes = self.interpreter.get_tensor(self.output_details[1]['index'])
-        scores = self.interpreter.get_tensor(self.output_details[2]['index'])
-        num = self.interpreter.get_tensor(self.output_details[3]['index'])
+        print()
+        print(boxes)
+        print(self.output_details)
+        print(self.interpreter.get_tensor)
+        #classes = self.interpreter.get_tensor(self.output_details[1]['index'])
+        #scores = self.interpreter.get_tensor(self.output_details[2]['index'])
+        #num = self.interpreter.get_tensor(self.output_details[3]['index'])
+        
+        return [], boxes, [0]
         
         # Find detected boxes coordinates
         return self._boxes_coordinates(image,
@@ -73,7 +83,7 @@ class ObjectDetectorLite:
                 # BUAT NENTUIN DIA TERMASUK LUBANG BESAR/SEDANG/KECIL
                 # TERUS APPEND KE CATEGORIES BUAT GANTIIN YANG DIBAWAH INI
                 # INI SEMENTARA DOANG, CUMA CETAK PERSENTASENYA
-                categories.append(self.category_index[classes[i]])
+                categories.append(classes[i])
         return np.array(detected_boxes), probabilities, categories
 
     def get_input_size(self):
