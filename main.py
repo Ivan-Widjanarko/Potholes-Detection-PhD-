@@ -78,7 +78,7 @@ def main():
 def login(email, password):
     conn = conf()
     with conn.cursor() as cursor:
-        query = "SELECT id FROM user WHERE email='{}' AND password='{}'".format(email, password)
+        query = "SELECT * FROM user WHERE email='{}' AND password='{}'".format(email, password)
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
