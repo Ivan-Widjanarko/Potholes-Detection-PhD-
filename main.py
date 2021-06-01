@@ -7,6 +7,7 @@ import pymysql
 
 app = Flask(__name__)
 #mysql = MySQL()
+data = []
 
 #MySQL configuration
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -81,11 +82,25 @@ def login(email, password):
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
-        if results:
-            return "email terdaftar"
+        if query > 0:
+            return jsonify(results)
         else:
-            return "email belum terdaftar"
+            return jsonify(message="Account has not been registered!")
     
+# for user in data.query.filter(User.id.in_(ids)).all():
+#     if current_user.id == user.id:
+#         continue
+
+#     if user.delete():
+#         data.append(
+#             {
+#                 "id": user.id,
+#                 "type": "delete",
+#                 "reverse": False,
+#                 "reverse_name": None,
+#                 "reverse_url": None
+#             }
+#         )
 
 
 # #post_user('/users/register/<string:email>/<string:password>/<int:device_id>')
@@ -109,8 +124,7 @@ def register_user(email, password, device_id):
                 cursor.execute(sql)
             conn.commit()
             conn.close()
-
-            return "User added"
+            return jsonify(message="Account has been registered!")
 
         except pymysql.err.IntegrityError as e:
             conn.rollback()
@@ -118,7 +132,7 @@ def register_user(email, password, device_id):
             return e.args[1]
 
     except Exception as e:
-        return e.args[1]
+        return jsonify(message="Failed to registered")
 
 
 
