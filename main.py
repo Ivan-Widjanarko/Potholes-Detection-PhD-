@@ -41,20 +41,21 @@ def main():
     return 'halo'
 
 
-def sql_to_json(results):
-    keys = []
-    for data in results:
-        keys.append(data[0])
-    key_number = len(keys)
+# def sql_to_json(results):
+#     keys = []
+#     for data in results:
+#         keys.append(data[0])
+#     key_number = len(keys)
 
-    json_data = []
-    for row in results:
-        item = dict()
-        for q in range(key_number):
-            item[keys[q]] = row[q]
-        json_data.append(item)
+#     json_data = []
+#     for row in results:
+#         item = dict()
+#         for q in range(key_number):
+#             item[keys[q]] = row[q]
+#         json_data.append(item)
 
-    return json_data
+#     return json_data
+
 
 # #get_user('/users/<string:email>/<string:password>')
 # @app.route('/users/<string:email>/<string:password>')
@@ -81,7 +82,7 @@ def login(email, password):
         results = cursor.fetchall()
         conn.close()
         if results:
-            return sql_to_json(results)
+            return "email terdaftar"
         else:
             return "email belum terdaftar"
     
