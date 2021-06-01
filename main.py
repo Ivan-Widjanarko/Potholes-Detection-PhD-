@@ -81,9 +81,10 @@ def login(email, password):
         query = "SELECT * FROM user WHERE email='{}' AND password='{}'".format(email, password)
         cursor.execute(query)
         results = cursor.fetchall()
+        messages = {'id':results[0],'email':results[1],'password':results[2],'device_id':results[3]}
         conn.close()
         if results:
-            return jsonify(results)
+            return jsonify(messages)
         else:
             return jsonify(message="Failed to login")
     
@@ -129,7 +130,7 @@ def register_user(email, password, device_id):
         except pymysql.err.IntegrityError as e:
             conn.rollback()
             conn.close()
-            return e.args[1]
+            return jsonify(message="Email has been registered. Please use another email!")
 
     except Exception as e:
         return jsonify(message="Failed to registered")
@@ -145,15 +146,16 @@ def register_user(email, password, device_id):
 def post_data(device_id, latitude, longitude, hole_type, url_img):
     conn = conf()
     with conn.cursor() as cursor:
-        sql = """
-        INSERT INTO data (user_id, latitude, longitude, hole_type, url_img)
-	    SELECT id, {}, {}, '{}', '{}' FROM user
-	    WHERE device_id = {}""".format(latitude, longitude, hole_type, url_img, device_id) #masukin ke dalam table database
-        cursor.execute(sql)
+        # sql = """
+        # INSERT INTO data (device_id, latitude, longitude, hole_type, url_img)
+	    # SELECT id, {}, {}, '{}', '{}' FROM user
+	    # WHERE device_id = {}""".format(latitude, longitude, hole_type, url_img, device_id) #masukin ke dalam table database
+        query = f"INSERT INTO data (device_id, latitude, longitude, hole_type, url_img) VALUES({device_id}, {latitude}, {longitude}, '{hole_type}', '{url_img}')" #masukin ke dalam table database
+        cursor.execute(query)
     conn.commit()
     conn.close()
 
-    return "Data added"
+    return jsonify(message="Data added")
 
 
 #get_data('/data/get/<int:device_id>')
@@ -161,19 +163,20 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
 def get_data(user_id):
     conn = conf()
     with conn.cursor() as cursor:
-        query = """
-        SELECT latitude, longitude, hole_type, url_img FROM data
-	        WHERE user_id={}
-        """.format(user_id)
+        # query = """
+        # SELECT latitude, longitude, hole_type, url_img FROM data
+	    #     WHERE user_id={}
+        # """.format(user_id)
+        query = f"SELECT * FROM data WHERE user_id={user_id}"
         cursor.execute(query)
         results = cursor.fetchall()
+        messages = {'id':results[0],'user_id':results[1],'latitude':results[2],'longitude':results[3],'hole_type':results[4],'url_img':results[5]}
         conn.close()
         if results:
-            return "data ditemukan"
+            return jsonify(messages)
         else:
-            return "data tidak ditemukan"
+            return jsonify(message="data tidak ditemukan")
     
-
 
 if __name__ == '__main__':
     app.run()
