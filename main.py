@@ -144,18 +144,25 @@ def register_user(email, password, device_id):
 #post_data('/data/send/<int:device_id>/<float:location>/<string:classification>/<string:url>/<string:time>')
 @app.route('/data/post/<int:device_id>/<float:latitude>/<float:longitude>/<string:hole_type>/<string:url_img>', methods=['POST'])
 def post_data(device_id, latitude, longitude, hole_type, url_img):
-    conn = conf()
-    with conn.cursor() as cursor:
-        # sql = """
-        # INSERT INTO data (device_id, latitude, longitude, hole_type, url_img)
-	    # SELECT id, {}, {}, '{}', '{}' FROM user
-	    # WHERE device_id = {}""".format(latitude, longitude, hole_type, url_img, device_id) #masukin ke dalam table database
-        query = f"INSERT INTO data (device_id, latitude, longitude, hole_type, url_img) VALUES({device_id}, {latitude}, {longitude}, '{hole_type}', '{url_img}')" #masukin ke dalam table database
-        cursor.execute(query)
-    conn.commit()
-    conn.close()
-
-    return jsonify(message="Data added")
+    try:
+        try:
+            conn = conf()
+            with conn.cursor() as cursor:
+                # sql = """
+                # INSERT INTO data (device_id, latitude, longitude, hole_type, url_img)
+                # SELECT id, {}, {}, '{}', '{}' FROM user
+                # WHERE device_id = {}""".format(latitude, longitude, hole_type, url_img, device_id) #masukin ke dalam table database
+                query = f"INSERT INTO data (device_id, latitude, longitude, hole_type, url_img) VALUES({device_id}, {latitude}, {longitude}, '{hole_type}', '{url_img}')" #masukin ke dalam table database
+                cursor.execute(query)
+            conn.commit()
+            conn.close()
+        except pymysql.err.IntegrityError as e:
+            conn.rollback()
+            conn.close()
+            return jsonify(message="Data added")
+    
+    except Exception as e:
+        return jsonify(message="Failed to upload data")
 
 
 #get_data('/data/get/<int:device_id>')
