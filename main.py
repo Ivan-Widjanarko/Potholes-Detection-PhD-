@@ -40,6 +40,22 @@ def conf():
 def main():
     return 'halo'
 
+
+def sql_to_json(results):
+    keys = []
+    for data in results:
+        keys.append(data[0])
+    key_number = len(keys)
+
+    json_data = []
+    for row in results:
+        item = dict()
+        for q in range(key_number):
+            item[keys[q]] = row[q]
+        json_data.append(item)
+
+    return json_data
+
 # #get_user('/users/<string:email>/<string:password>')
 # @app.route('/users/<string:email>/<string:password>')
 # def get_user(email, password):
@@ -65,7 +81,7 @@ def login(email, password):
         results = cursor.fetchall()
         conn.close()
         if results:
-            return "Anda berhasil login"
+            return sql_to_json(results)
         else:
             return "email belum terdaftar"
     
@@ -102,9 +118,6 @@ def register_user(email, password, device_id):
 
     except Exception as e:
         return e.args[1]
-
-
-
 
 
 
