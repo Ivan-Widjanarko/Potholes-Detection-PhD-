@@ -159,7 +159,7 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
 
 
 #get_data('/data/get/<int:device_id>')
-@app.route('/data/get/<int:device_id')
+@app.route('/data/get/<int:device_id>')
 def get_data(device_id):
     conn = conf()
     with conn.cursor() as cursor:
