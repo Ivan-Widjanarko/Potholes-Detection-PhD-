@@ -21,5 +21,7 @@
     <string name="text_street">Street Name</string>
     <string name="text_category">Category</string>
     <string name="results">Results</string>
+    <string name="coordinate">Coordinate</string>
+    <string name="time">Time</string>
 
 </resources>

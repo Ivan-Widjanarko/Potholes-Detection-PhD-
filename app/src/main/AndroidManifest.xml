@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CapstoneProject">
-        <activity android:name=".ui.report.ReportActivity"></activity>
+        <activity android:name=".ui.report.ReportDetailActivity"></activity>
+        <activity android:name=".ui.report.ReportActivity" />
         <activity android:name=".ui.about.AboutActivity" />
         <activity android:name=".ui.authentication.AuthActivity" />
         <activity
