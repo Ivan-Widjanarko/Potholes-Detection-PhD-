@@ -93,7 +93,7 @@ def login(email, password):
 def get_status(device_id):
     conn = conf()
     with conn.cursor() as cursor:
-        query = f"SELECT status FROM user WHERE device_id={device_id}"
+        query = f"SELECT state FROM user WHERE device_id={device_id}"
         cursor.execute(query)
         results=cursor.fetchall()
         conn.close()
