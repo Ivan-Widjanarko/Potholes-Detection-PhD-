@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import id.develo.capstoneproject.data.local.entity.UserEntity
 import id.develo.capstoneproject.data.remote.api.ApiConfig
 import id.develo.capstoneproject.data.remote.response.PostUserResponse
 import id.develo.capstoneproject.utils.Event

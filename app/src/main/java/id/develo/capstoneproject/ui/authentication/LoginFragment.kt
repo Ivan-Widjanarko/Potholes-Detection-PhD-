@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import id.develo.capstoneproject.MainActivity
 import id.develo.capstoneproject.R
 import id.develo.capstoneproject.databinding.FragmentLoginBinding
-import id.develo.capstoneproject.ui.about.AboutActivity
 
 
 class LoginFragment : Fragment() {
@@ -22,17 +20,16 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
-    private lateinit var inputEmail: String
-    private lateinit var inputPassword: String
+//    private lateinit var inputEmail: String
+//    private lateinit var inputPassword: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,9 +85,9 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun moveToHomeIfSuccess() {
-        loginViewModel.isSuccess.observe(requireActivity(), {
-            if (it) {
+    private fun moveToHomeIfSuccess() {
+        loginViewModel.isSuccess.observe(requireActivity(), { success ->
+            if (success) {
                 Intent(activity, MainActivity::class.java).also {
                     startActivity(it)
                     parentFragmentManager.popBackStack()
@@ -99,7 +96,7 @@ class LoginFragment : Fragment() {
         })
     }
 
-    fun launchSnackBar() {
+    private fun launchSnackBar() {
         loginViewModel.snackbarText.observe(requireActivity(), {
             it.getContentIfNotHandled()?.let { snackbarText ->
                 Snackbar.make(

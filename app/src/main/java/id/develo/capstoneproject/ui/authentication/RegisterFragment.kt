@@ -1,7 +1,6 @@
 package id.develo.capstoneproject.ui.authentication
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,11 +20,10 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +43,7 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    fun register() {
+    private fun register() {
         if (binding.tfEmail.editText?.text!!.isEmpty()) {
             binding.tfEmail.error = "This field is required!"
         } else binding.tfEmail.error = null
@@ -71,7 +69,7 @@ class RegisterFragment : Fragment() {
         )
     }
 
-    fun launchSnackBar() {
+    private fun launchSnackBar() {
         registerViewModel.snackbarText.observe(requireActivity(), {
             it.getContentIfNotHandled()?.let { snackbarText ->
                 Snackbar.make(
@@ -83,13 +81,13 @@ class RegisterFragment : Fragment() {
         })
     }
 
-    fun moveToLoginIfSuccess() {
+    private fun moveToLoginIfSuccess() {
         registerViewModel.isSuccess.observe(requireActivity(), {
             if (it) parentFragmentManager.popBackStack()
         })
     }
 
-    fun setProgressBar() {
+    private fun setProgressBar() {
         registerViewModel.isLoading.observe(requireActivity(), {
             binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         })

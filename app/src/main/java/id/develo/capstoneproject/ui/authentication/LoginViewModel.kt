@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import id.develo.capstoneproject.data.local.entity.UserEntity
 import id.develo.capstoneproject.data.remote.api.ApiConfig
 import id.develo.capstoneproject.data.remote.response.GetUserResponse
 import id.develo.capstoneproject.utils.Event
@@ -57,14 +56,14 @@ class LoginViewModel: ViewModel() {
 
                 } else {
                     _isSuccess.value = false
-                    Log.e(RegisterViewModel.TAG, "GAGAL: ${response.message()}")
+                    Log.e(TAG, "GAGAL: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
                 _isSuccess.value = false
                 _isLoading.value = false
-                Log.e(RegisterViewModel.TAG, "onFailure: ${t.message.toString()}")
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }
