@@ -68,7 +68,7 @@ def get_status(device_id):
         else:
             return jsonify(status="False")
 
-@app.route("/user/set/status/<int:id>/<int:state>", methods=['POST'])
+@app.route("/user/set/status/<int:id>/<int:state>", methods=['PUT'])
 def set_status(id, state):
     try:
         try:
