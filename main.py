@@ -102,18 +102,18 @@ def get_status(device_id):
         else:
             return jsonify(status="False")
 
-# @app.route("/user/set/<int:id>/status/<int:state>", methods=['POST'])
-# def get_status(id, state):
-#     conn = conf()
-#     with conn.cursor() as cursor:
-#         query = f"INSERT INTO user (status) VALUES({state}) WHERE id={id}"
-#         cursor.execute(query)
-#         results=cursor.fetchall()
-#         conn.close()
-#         if results:
-#             return jsonify(status=results[0])
-#         else:
-#             return jsonify(status="False")
+@app.route("/user/set/status/<int:id>/<int:state>", methods=['POST'])
+def set_status(id, state):
+    conn = conf()
+    with conn.cursor() as cursor:
+        query = f"UPDATE user SET state = {state} WHERE id={id}"
+        cursor.execute(query)
+        results=cursor.fetchall()
+        conn.close()
+        if results:
+            return jsonify(status=results[0])
+        else:
+            return jsonify(status="False")
 
 
 # for user in data.query.filter(User.id.in_(ids)).all():
