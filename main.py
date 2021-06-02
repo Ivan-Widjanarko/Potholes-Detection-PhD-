@@ -7,7 +7,7 @@ import pymysql
 
 app = Flask(__name__)
 #mysql = MySQL()
-data = []
+# data = []
 
 #MySQL configuration
 db_user = os.environ.get('CLOUD_SQL_USERNAME')
@@ -81,12 +81,13 @@ def login(email, password):
         query = "SELECT * FROM user WHERE email='{}' AND password='{}'".format(email, password)
         cursor.execute(query)
         results = cursor.fetchall()
-        messages = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3]}
+        user_info = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3]}
+        messages = {"status": "OK", "message":  "Login Success.", "user_info": user_info}
         conn.close()
         if results:
             return jsonify(messages)
         else:
-            return jsonify(message="Failed to login")
+            return jsonify(status="bad",message="Failed to login")
     
 # for user in data.query.filter(User.id.in_(ids)).all():
 #     if current_user.id == user.id:
@@ -125,21 +126,41 @@ def register_user(email, password, device_id):
                 cursor.execute(sql)
             conn.commit()
             conn.close()
-            return jsonify(message="Account has been registered!")
+            return jsonify(status="OK", message="Account has been registered!")
 
         except pymysql.err.IntegrityError as e:
             conn.rollback()
             conn.close()
-            return jsonify(message="Email has been registered. Please use another email!")
+            return jsonify(status="bad", message="Email has been registered. Please use another email!")
 
     except Exception as e:
-        return jsonify(message="Failed to registered")
+        return jsonify(status="err", message="Failed to registered")
 
 
 
-#post_dataimage('/')
+#post_dataimage('/report/')
+# @app.route('/report/')
+# def raspi_to_sql():
+#     try:
+#         try:
+#             conn = conf()
+#             with conn.cursor() as cursor:
+#                 sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
+#                 cursor.execute(sql)
+#             conn.commit()
+#             conn.close()
+#             return jsonify(message="Account has been registered!")
 
-#get_dataimage('')
+#         except pymysql.err.IntegrityError as e:
+#             conn.rollback()
+#             conn.close()
+#             return jsonify(message="Email has been registered. Please use another email!")
+
+#     except Exception as e:
+#         return jsonify(message="Failed to registered")
+
+#get_dataimage('/')
+
 
 #post_data('/data/send/<int:device_id>/<float:location>/<string:classification>/<string:url>/<string:time>')
 @app.route('/data/post/<int:device_id>/<float:latitude>/<float:longitude>/<string:hole_type>/<string:url_img>', methods=['POST'])
@@ -177,7 +198,8 @@ def get_data(device_id):
         query = f"SELECT * FROM data WHERE device_id={device_id}"
         cursor.execute(query)
         results = cursor.fetchall()
-        messages = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
+        data_info = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
+        messages = {"status":"OK", "message": "data found.", "data_info": data_info}
         conn.close()
         if results:
             return jsonify(messages)
