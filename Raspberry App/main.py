@@ -1,12 +1,12 @@
 import numpy as np
 import picamera
 import argparse
+import time
 
 import matplotlib
 import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
-from utils import draw_bounding_boxes_on_image_array
 from utils import load_image
 from detector import ObjectDetectorLite
 
@@ -30,7 +30,6 @@ if __name__ == '__main__':
     
     fig = plt.gcf()
     fig.canvas.set_window_title('Object Detection')
-    fig.suptitle('Detecting')
     ax = plt.gca()
     ax.set_axis_off()
     tmp = np.zeros(input_size + [3], np.uint8)
@@ -44,13 +43,19 @@ if __name__ == '__main__':
             
             image = load_image(stream, (224, 224))
             image = image.astype('float32')
-            boxes, scores, classes = detector.detect(image, args.confidence)
+            scores = detector.detect(image, args.confidence)
             image = image.astype('uint8')
-            for label, score in zip(classes, scores):
-                print(label, score)
+            print(scores)
             
-            if len(boxes) > 0:
-                draw_bounding_boxes_on_image_array(image, boxes, display_str_list=classes)
+            if (scores > 0.75 ):
+                fig.suptitle('Detected')
+            else:
+                fig.suptitle('Detecting...')
+                
             
             preview.set_data(image)
             fig.canvas.get_tk_widget().update()
+            
+            start = time.time()
+            while time.time() - start < 1:
+                pass
