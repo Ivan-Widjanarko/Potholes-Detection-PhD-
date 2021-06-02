@@ -102,7 +102,7 @@ def get_status(device_id):
         else:
             return jsonify(status="False")
 
-@app.route("/user/set/<int:id>/status/<boolean:state>")
+@app.route("/user/set/<int:id>/status/<int:state>")
 def get_status(id, state):
     conn = conf()
     with conn.cursor() as cursor:
@@ -144,13 +144,13 @@ def get_status(id, state):
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
 @app.route('/user/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
-def register_user(email, password, device_id, state=False):
+def register_user(email, password, device_id, state=0):
     try:
         try:
             conn = conf()
             with conn.cursor() as cursor:
-                sql = "INSERT INTO user (email, password, device_id, status) VALUES('{}', '{}', {}, {})".format(email, password, device_id, state) #masukin ke dalam table database
-                cursor.execute(sql)
+                query = f"INSERT INTO user (email, password, device_id, status) VALUES('{email}', '{password}', {device_id}, {state})" #masukin ke dalam table database
+                cursor.execute(query)
             conn.commit()
             conn.close()
             return jsonify(status="OK", message="Account has been registered!")
