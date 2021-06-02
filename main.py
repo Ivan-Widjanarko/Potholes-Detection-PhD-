@@ -89,18 +89,18 @@ def login(email, password):
         else:
             return jsonify(status="bad",message="Wrong Email or Password")
 
-# @app.route("/user/get/<int:device_id>/status")
-# def get_status(device_id):
-#     conn = conf()
-#     with conn.cursor() as cursor:
-#         query = f"SELECT status FROM user WHERE device_id={device_id}"
-#         cursor.execute(query)
-#         results=cursor.fetchall()
-#         conn.close()
-#         if results:
-#             return jsonify(status=results[0])
-#         else:
-#             return jsonify(status="False")
+@app.route("/user/get/status/<int:device_id>")
+def get_status(device_id):
+    conn = conf()
+    with conn.cursor() as cursor:
+        query = f"SELECT status FROM user WHERE device_id={device_id}"
+        cursor.execute(query)
+        results=cursor.fetchall()
+        conn.close()
+        if results:
+            return jsonify(status=results[0])
+        else:
+            return jsonify(status="False")
 
 # @app.route("/user/set/<int:id>/status/<int:state>", methods=['POST'])
 # def get_status(id, state):
