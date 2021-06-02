@@ -70,16 +70,23 @@ def get_status(device_id):
 
 @app.route("/user/set/status/<int:id>/<int:state>", methods=['POST'])
 def set_status(id, state):
-    conn = conf()
-    with conn.cursor() as cursor:
-        query = f"UPDATE user SET state = {state} WHERE id={id}"
-        cursor.execute(query)
-        results=cursor.fetchall()
-        conn.close()
-        if results:
-            return jsonify(status=results[0])
-        else:
-            return jsonify(status="False")
+    try:
+        try:
+            conn = conf()
+            with conn.cursor() as cursor:
+                query = f"UPDATE user SET state = {state} WHERE id={id}"
+                cursor.execute(query)
+            conn.commit()
+            conn.close()
+            return jsonify(status="OK", message="Account has been registered!")
+
+        except pymysql.err.IntegrityError as e:
+            conn.rollback()
+            conn.close()
+            return jsonify(status="bad", message="Failed to set status!")
+
+    except Exception as e:
+        return jsonify(status="err", message="Failed to set status!")
 
 
 # for user in data.query.filter(User.id.in_(ids)).all():
