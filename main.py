@@ -144,12 +144,12 @@ def login(email, password):
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
 @app.route('/user/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
-def register_user(email, password, device_id):
+def register_user(email, password, device_id, state=0):
     try:
         try:
             conn = conf()
             with conn.cursor() as cursor:
-                query = f"INSERT INTO user (email, password, device_id) VALUES('{email}', '{password}', {device_id})" #masukin ke dalam table database
+                query = f"INSERT INTO user (email, password, device_id, state) VALUES('{email}', '{password}', {device_id} {state})" #masukin ke dalam table database
                 cursor.execute(query)
             conn.commit()
             conn.close()
