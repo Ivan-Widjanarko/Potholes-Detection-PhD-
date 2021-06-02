@@ -41,39 +41,6 @@ def conf():
 def main():
     return 'halo'
 
-
-# def sql_to_json(results):
-#     keys = []
-#     for data in results:
-#         keys.append(data[0])
-#     key_number = len(keys)
-
-#     json_data = []
-#     for row in results:
-#         item = dict()
-#         for q in range(key_number):
-#             item[keys[q]] = row[q]
-#         json_data.append(item)
-
-#     return json_data
-
-
-# #get_user('/users/<string:email>/<string:password>')
-# @app.route('/users/<string:email>/<string:password>')
-# def get_user(email, password):
-#     conn = main()
-#     with conn.cursor() as cursor:
-#         result = "SELECT * FROM data_table WHERE email=%s AND password=%s" #ngambil email dan password dari tabel database
-#         val = (email, password)
-#         cursor.execute(result, val)
-#         user = cursor.fetchall()
-#         if result > 0:
-#             getUser = jsonify(user)
-#         else:
-#             getUser = 'Email kamu belum terdaftar'
-#     conn.close()
-#     return getUser
-
 @app.route('/user/login/<string:email>/<string:password>')
 def login(email, password):
     conn = conf()
@@ -87,36 +54,8 @@ def login(email, password):
             messages = {"status": "OK", "message":  "Login Success.", "user_info": user_info}
             return jsonify(messages)
         else:
-            if email != results[0][1] and password != results[0][2]:
-                return jsonify(status="bad",message="Wrong Email or Password")
+            return jsonify(status="bad",message="Wrong Email or Password")
     
-# for user in data.query.filter(User.id.in_(ids)).all():
-#     if current_user.id == user.id:
-#         continue
-
-#     if user.delete():
-#         data.append(
-#             {
-#                 "id": user.id,
-#                 "type": "delete",
-#                 "reverse": False,
-#                 "reverse_name": None,
-#                 "reverse_url": None
-#             }
-#         )
-
-
-# #post_user('/users/register/<string:email>/<string:password>/<int:device_id>')
-# @app.route('/users/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
-# def post_user(email, password, device_id):
-#     conn = main()
-#     with conn.cursor() as cursor:
-#         sql = "INSERT INTO data_table (email, password, device_id) VALUES(%s, %s, %s)"
-#         val = (email, password, device_id)
-#         cursor.execute(sql, val) #masukin ke dalam table database
-#     conn.commit()
-#     conn.close()
-#     flash('Email kamu berhasil terdaftar')
 @app.route('/user/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
 def register_user(email, password, device_id):
     try:
@@ -136,31 +75,6 @@ def register_user(email, password, device_id):
 
     except Exception as e:
         return jsonify(status="err", message="Failed to registered")
-
-
-
-#post_dataimage('/report/')
-# @app.route('/report/')
-# def raspi_to_sql():
-#     try:
-#         try:
-#             conn = conf()
-#             with conn.cursor() as cursor:
-#                 sql = "INSERT INTO user (email, password, device_id) VALUES('{}', '{}', {})".format(email, password, device_id) #masukin ke dalam table database
-#                 cursor.execute(sql)
-#             conn.commit()
-#             conn.close()
-#             return jsonify(message="Account has been registered!")
-
-#         except pymysql.err.IntegrityError as e:
-#             conn.rollback()
-#             conn.close()
-#             return jsonify(message="Email has been registered. Please use another email!")
-
-#     except Exception as e:
-#         return jsonify(message="Failed to registered")
-
-#get_dataimage('/')
 
 
 #post_data('/data/send/<int:device_id>/<float:location>/<string:classification>/<string:url>/<string:time>')
