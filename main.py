@@ -78,7 +78,7 @@ def main():
 def login(email, password):
     conn = conf()
     with conn.cursor() as cursor:
-        query = "SELECT * FROM user WHERE email='{}' AND password='{}'".format(email, password)
+        query = f"SELECT * FROM user WHERE email='{email}' AND password='{password}'"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
@@ -98,7 +98,7 @@ def get_status(device_id):
         results=cursor.fetchall()
         conn.close()
         if results:
-            return jsonify(status=results[0])
+            return jsonify(status=results[0][0])
         else:
             return jsonify(status="False")
 
