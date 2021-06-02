@@ -9,6 +9,12 @@ matplotlib.use('TkAgg')
 
 from utils import load_image
 from detector import ObjectDetectorLite
+from upload import upload_to_gstorage
+from PIL import Image
+
+bucket_name ='storagedemo_1'
+blob_name = 'detected'
+file_name = 'foto.png'
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Object Detection')
@@ -49,6 +55,11 @@ if __name__ == '__main__':
             
             if (scores > 0.75 ):
                 fig.suptitle('Detected')
+                im = Image.fromarray(image)
+                im.save("your_file.jpeg")
+                upload_to_gstorage(bucket_name, blob_name, "your_file.jpeg")
+            
+                
             else:
                 fig.suptitle('Detecting...')
                 
