@@ -7,4 +7,5 @@
     <color name="secondary_dark">#164451</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_gray">#D0000000</color>
 </resources>
