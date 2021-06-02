@@ -87,7 +87,8 @@ def login(email, password):
             messages = {"status": "OK", "message":  "Login Success.", "user_info": user_info}
             return jsonify(messages)
         else:
-            return jsonify(status="bad",message="Failed to login")
+            if email != results[0][1] and password != results[0][2]:
+                return jsonify(status="bad",message="Wrong Email or Password")
     
 # for user in data.query.filter(User.id.in_(ids)).all():
 #     if current_user.id == user.id:
