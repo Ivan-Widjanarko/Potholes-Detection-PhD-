@@ -177,11 +177,11 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
                 cursor.execute(query)
             conn.commit()
             conn.close()
+            return jsonify(message="Data added")
         except pymysql.err.IntegrityError as e:
             conn.rollback()
             conn.close()
-            return jsonify(message="Data added")
-    
+            return jsonify(message="Failed to upload data")
     except Exception as e:
         return jsonify(message="Failed to upload data")
 
@@ -201,7 +201,7 @@ def get_data(device_id):
         conn.close()
         if results:
             data_info = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
-            messages = {"status":"OK", "message": "data found.", "data_info": data_info}
+            messages = {"status":"OK", "message": "data found.", "data_info": [data_info]}
             return jsonify(messages)
         else:
             return jsonify(status="bad", message="data tidak ditemukan")
