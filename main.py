@@ -78,15 +78,15 @@ def set_status(id, state):
                 cursor.execute(query)
             conn.commit()
             conn.close()
-            return jsonify(status="OK", message="Account has been registered!")
+            return jsonify(status="OK", message="State is changed!")
 
         except pymysql.err.IntegrityError as e:
             conn.rollback()
             conn.close()
-            return jsonify(status="bad", message="Failed to set status!")
+            return jsonify(status="bad", message="Failed to set state!")
 
     except Exception as e:
-        return jsonify(status="err", message="Failed to set status!")
+        return jsonify(status="err", message="Failed to set state!")
 
 
 # for user in data.query.filter(User.id.in_(ids)).all():
