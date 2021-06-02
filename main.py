@@ -81,10 +81,10 @@ def login(email, password):
         query = "SELECT * FROM user WHERE email='{}' AND password='{}'".format(email, password)
         cursor.execute(query)
         results = cursor.fetchall()
-        user_info = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3]}
-        messages = {"status": "OK", "message":  "Login Success.", "user_info": user_info}
         conn.close()
         if results:
+            user_info = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3]}
+            messages = {"status": "OK", "message":  "Login Success.", "user_info": user_info}
             return jsonify(messages)
         else:
             return jsonify(status="bad",message="Failed to login")
@@ -198,13 +198,13 @@ def get_data(device_id):
         query = f"SELECT * FROM data WHERE device_id={device_id}"
         cursor.execute(query)
         results = cursor.fetchall()
-        data_info = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
-        messages = {"status":"OK", "message": "data found.", "data_info": data_info}
         conn.close()
         if results:
+            data_info = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
+            messages = {"status":"OK", "message": "data found.", "data_info": data_info}
             return jsonify(messages)
         else:
-            return jsonify(message="data tidak ditemukan")
+            return jsonify(status="bad", message="data tidak ditemukan")
     
 
 if __name__ == '__main__':
