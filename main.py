@@ -199,7 +199,7 @@ def get_data(device_id):
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
-        if results > 0:
+        if results:
             # items=[]
             for x in range(len(results)):
                 data_info = {'id':results[x][0],'device_id':results[x][1],'latitude':results[x][2],'longitude':results[x][3],'hole_type':results[x][4],'url_img':results[x][5]}
