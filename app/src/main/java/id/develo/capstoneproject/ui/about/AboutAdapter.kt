@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import id.develo.capstoneproject.data.entity.CreatorEntity
+import id.develo.capstoneproject.data.local.entity.CreatorEntity
 import id.develo.capstoneproject.databinding.ItemCreatorLayoutBinding
 
 class AboutAdapter(private val listCreator: ArrayList<CreatorEntity>) :

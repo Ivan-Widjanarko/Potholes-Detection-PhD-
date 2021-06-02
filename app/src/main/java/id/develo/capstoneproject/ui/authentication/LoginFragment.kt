@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import id.develo.capstoneproject.MainActivity
 import id.develo.capstoneproject.R
 import id.develo.capstoneproject.databinding.FragmentLoginBinding
@@ -17,6 +19,11 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private val loginViewModel: LoginViewModel by viewModels()
+
+    private lateinit var inputEmail: String
+    private lateinit var inputPassword: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,16 +38,39 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setProgressBar()
+
+        launchSnackBar()
+
+        moveToHomeIfSuccess()
+
         binding.btnLogin.setOnClickListener {
-            Intent(activity, MainActivity::class.java).also {
-                startActivity(it)
-            }
+            checkUserInDatabase()
         }
 
         binding.tvSignup.setOnClickListener {
             // Move to Register Page
             moveToRegister()
         }
+    }
+
+    private fun checkUserInDatabase() {
+        if (binding.tfEmail.editText?.text!!.isEmpty()) {
+            binding.tfEmail.error = "This field is required!"
+            return
+        } else {
+            binding.tfEmail.error = null
+        }
+        if (binding.tfPassword.editText?.text!!.isEmpty()) {
+            binding.tfPassword.error = "This field is required!"
+            return
+        } else {
+            binding.tfPassword.error = null
+        }
+
+        val inputEmail = binding.tfEmail.editText?.text.toString()
+        val inputPassword = binding.tfPassword.editText?.text.toString()
+        loginViewModel.getUser(inputEmail, inputPassword)
     }
 
     private fun moveToRegister() {
@@ -56,6 +86,35 @@ class LoginFragment : Fragment() {
             addToBackStack(null)
             commit()
         }
+    }
+
+    fun moveToHomeIfSuccess() {
+        loginViewModel.isSuccess.observe(requireActivity(), {
+            if (it) {
+                Intent(activity, MainActivity::class.java).also {
+                    startActivity(it)
+                    parentFragmentManager.popBackStack()
+                }
+            }
+        })
+    }
+
+    fun launchSnackBar() {
+        loginViewModel.snackbarText.observe(requireActivity(), {
+            it.getContentIfNotHandled()?.let { snackbarText ->
+                Snackbar.make(
+                    requireActivity().window.decorView.rootView,
+                    snackbarText,
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        })
+    }
+
+    private fun setProgressBar() {
+        loginViewModel.isLoading.observe(requireActivity(), {
+            binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        })
     }
 
     override fun onDestroyView() {

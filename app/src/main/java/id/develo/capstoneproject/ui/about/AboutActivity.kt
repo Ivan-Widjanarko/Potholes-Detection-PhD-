@@ -3,9 +3,8 @@ package id.develo.capstoneproject.ui.about
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.develo.capstoneproject.R
-import id.develo.capstoneproject.data.CreatorsData
-import id.develo.capstoneproject.data.entity.CreatorEntity
+import id.develo.capstoneproject.data.local.CreatorsData
+import id.develo.capstoneproject.data.local.entity.CreatorEntity
 import id.develo.capstoneproject.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {

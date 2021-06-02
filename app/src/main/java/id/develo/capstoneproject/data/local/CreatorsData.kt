@@ -1,7 +1,7 @@
-package id.develo.capstoneproject.data
+package id.develo.capstoneproject.data.local
 
 import id.develo.capstoneproject.R
-import id.develo.capstoneproject.data.entity.CreatorEntity
+import id.develo.capstoneproject.data.local.entity.CreatorEntity
 
 object CreatorsData {
     private val creatorNames = arrayOf(
@@ -25,7 +25,7 @@ object CreatorsData {
     private val creatorImages = intArrayOf(
         R.drawable.img_ivanw,
         R.drawable.img_irfa,
-        R.drawable.img_teddy,
+        R.drawable.img_hanif,
         R.drawable.img_ads,
         R.drawable.img_teddy,
         R.drawable.img_faradila

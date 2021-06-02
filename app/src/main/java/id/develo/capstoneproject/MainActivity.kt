@@ -3,6 +3,7 @@ package id.develo.capstoneproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import id.develo.capstoneproject.databinding.ActivityMainBinding
 import id.develo.capstoneproject.ui.about.AboutActivity
 
@@ -18,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         startDriving()
 
         moveToAbout()
+
+        Glide.with(this)
+            .load(R.drawable.img_banner)
+            .into(binding.imageView)
     }
 
     private fun startDriving() {

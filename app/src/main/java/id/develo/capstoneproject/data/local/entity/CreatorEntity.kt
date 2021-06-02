@@ -1,4 +1,4 @@
-package id.develo.capstoneproject.data.entity
+package id.develo.capstoneproject.data.local.entity
 
 data class CreatorEntity(
     var img: Int = 0,

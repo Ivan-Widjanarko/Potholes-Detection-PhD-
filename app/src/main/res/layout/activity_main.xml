@@ -13,10 +13,11 @@
         android:layout_height="250dp"
         android:contentDescription="@string/image_banner_home"
         android:scaleType="centerCrop"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/img_banner" />
 
     <Button
         android:id="@+id/btn_start"
