@@ -200,10 +200,11 @@ def get_data(device_id):
         results = cursor.fetchall()
         conn.close()
         if results:
-            # items=[]
+            items=[]
             for x in range(len(results)):
                 data_info = {'id':results[x][0],'device_id':results[x][1],'latitude':results[x][2],'longitude':results[x][3],'hole_type':results[x][4],'url_img':results[x][5]}
-                messages = {"status":"OK", "message": "data found.", "data_info": [data_info]}
+                items.append(data_info)
+            messages = {"status":"OK", "message": "data found.", "data_info": items}
             return jsonify(messages)
         else:
             return jsonify(status="bad", message="data tidak ditemukan")
