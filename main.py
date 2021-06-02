@@ -214,15 +214,15 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
 
 
 #get_data('/data/get/<int:device_id>')
-@app.route('/data/get/<int:device_id>')
-def get_data(device_id):
+@app.route('/data/get/<int:user_id>')
+def get_data(user_id):
     conn = conf()
     with conn.cursor() as cursor:
         # query = """
         # SELECT latitude, longitude, hole_type, url_img FROM data
 	    #     WHERE user_id={}
         # """.format(user_id)
-        query = f"SELECT * FROM data WHERE device_id={device_id}"
+        query = f"SELECT * FROM data WHERE user_id={user_id}"
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
