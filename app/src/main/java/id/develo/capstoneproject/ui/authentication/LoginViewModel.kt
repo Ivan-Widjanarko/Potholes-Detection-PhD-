@@ -26,6 +26,8 @@ class LoginViewModel: ViewModel() {
     private var _snackbarText = MutableLiveData<Event<String>>()
     val snackbarText: LiveData<Event<String>> = _snackbarText
 
+    var idFromApi: Int? = 0
+
 //    private val _emailFromApi = MutableLiveData<String>()
     var emailFromApi: String? = null
 
@@ -45,6 +47,7 @@ class LoginViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     if (response.body()?.status == "OK") {
                         _isSuccess.value = true
+                        idFromApi = response.body()?.userInfo?.id
                         emailFromApi = response.body()?.userInfo?.email
                         passwordFromApi = response.body()?.userInfo?.password
                         deviceIdFromApi = response.body()?.userInfo?.deviceId

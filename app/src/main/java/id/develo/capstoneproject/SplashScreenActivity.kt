@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import id.develo.capstoneproject.ui.authentication.AuthActivity
+import id.develo.capstoneproject.utils.AppPreferences
 
 @Suppress("DEPRECATION")
 class SplashScreenActivity : AppCompatActivity() {
@@ -28,9 +29,16 @@ class SplashScreenActivity : AppCompatActivity() {
         )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            Intent(this, AuthActivity::class.java).also {
-                startActivity(it)
-                finish()
+            if (AppPreferences.isLogin) {
+                Intent(this, MainActivity::class.java).also {
+                    startActivity(it)
+                    finish()
+                }
+            } else {
+                Intent(this, AuthActivity::class.java).also {
+                    startActivity(it)
+                    finish()
+                }
             }
         }, SPLASH_TIME)
     }

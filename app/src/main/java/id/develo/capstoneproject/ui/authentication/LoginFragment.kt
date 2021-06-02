@@ -11,6 +11,8 @@ import com.google.android.material.snackbar.Snackbar
 import id.develo.capstoneproject.MainActivity
 import id.develo.capstoneproject.R
 import id.develo.capstoneproject.databinding.FragmentLoginBinding
+import id.develo.capstoneproject.utils.AppPreferences
+import kotlin.math.log
 
 
 class LoginFragment : Fragment() {
@@ -88,10 +90,17 @@ class LoginFragment : Fragment() {
     private fun moveToHomeIfSuccess() {
         loginViewModel.isSuccess.observe(requireActivity(), { success ->
             if (success) {
+                // create session
+                if (!AppPreferences.isLogin) {
+                    AppPreferences.isLogin = true
+                    AppPreferences.uId = loginViewModel.idFromApi!!
+                    AppPreferences.email = loginViewModel.emailFromApi.toString()
+                    AppPreferences.password = loginViewModel.passwordFromApi.toString()
+                }
                 Intent(activity, MainActivity::class.java).also {
                     startActivity(it)
-                    parentFragmentManager.popBackStack()
                 }
+                activity?.finish()
             }
         })
     }

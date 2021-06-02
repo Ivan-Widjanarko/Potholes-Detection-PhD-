@@ -4,6 +4,7 @@
     <string name="about_us">About Us</string>
     <string name="image_banner_home">Image Banner Home</string>
     <string name="action_settings">settings</string>
+    <string name="action_logout">Logout</string>
 
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -16,4 +17,5 @@
     <string name="sign_in_here">Already have an account? Sign In</string>
     <string name="text_project_description">A 2021 Bangkit Program project in the form of an Android application that connects with the Raspberry Pi to detect potholes while driving and then sends the potholes data along with its location to JAKI.</string>
     <string name="text_creator">Creator</string>
+
 </resources>
