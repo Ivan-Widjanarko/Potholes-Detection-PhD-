@@ -143,7 +143,7 @@ def login(email, password):
 #     conn.commit()
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
-@app.route('/user/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
+@app.route('/user/register/<string:email>/<string:password>/<int:device_id>/<int:state>', methods=['POST'])
 def register_user(email, password, device_id, state=0):
     try:
         try:
