@@ -144,7 +144,7 @@ def login(email, password):
 #     conn.close()
 #     flash('Email kamu berhasil terdaftar')
 @app.route('/user/register/<string:email>/<string:password>/<int:device_id>/<int:state>', methods=['POST'])
-def register_user(email, password, device_id, state=0):
+def register_user(email, password, device_id, state):
     try:
         try:
             conn = conf()
