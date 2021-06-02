@@ -199,9 +199,11 @@ def get_data(device_id):
         cursor.execute(query)
         results = cursor.fetchall()
         conn.close()
-        if results:
-            data_info = {'id':results[0][0],'device_id':results[0][1],'latitude':results[0][2],'longitude':results[0][3],'hole_type':results[0][4],'url_img':results[0][5]}
-            messages = {"status":"OK", "message": "data found.", "data_info": [data_info]}
+        if results > 0:
+            # items=[]
+            for x in range(len(results)):
+                data_info = {'id':results[x][0],'device_id':results[x][1],'latitude':results[x][2],'longitude':results[x][3],'hole_type':results[x][4],'url_img':results[x][5]}
+                messages = {"status":"OK", "message": "data found.", "data_info": [data_info]}
             return jsonify(messages)
         else:
             return jsonify(status="bad", message="data tidak ditemukan")
