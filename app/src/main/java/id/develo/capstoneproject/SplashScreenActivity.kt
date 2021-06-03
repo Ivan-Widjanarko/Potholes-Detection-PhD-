@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import id.develo.capstoneproject.ui.authentication.AuthActivity
+import id.develo.capstoneproject.ui.main.MainActivity
 import id.develo.capstoneproject.utils.AppPreferences
 
 @Suppress("DEPRECATION")

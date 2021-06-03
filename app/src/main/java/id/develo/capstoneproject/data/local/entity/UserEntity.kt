@@ -14,5 +14,8 @@ data class UserEntity(
     val id: Int,
 
     @field:SerializedName("email")
-    val email: String
+    val email: String,
+
+    @field:SerializedName("state")
+    val state: Int
 )

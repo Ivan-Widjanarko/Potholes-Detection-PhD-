@@ -26,16 +26,17 @@ class LoginViewModel: ViewModel() {
     private var _snackbarText = MutableLiveData<Event<String>>()
     val snackbarText: LiveData<Event<String>> = _snackbarText
 
-    var idFromApi: Int? = 0
+    private val _idFromApi = MutableLiveData<Int>()
+    var idFromApi: LiveData<Int> = _idFromApi
 
-//    private val _emailFromApi = MutableLiveData<String>()
-    var emailFromApi: String? = null
+    private val _emailFromApi = MutableLiveData<String>()
+    var emailFromApi: LiveData<String> = _emailFromApi
 
-//    private val _passwordFromApi = MutableLiveData<String>()
-    var passwordFromApi: String? = null
+    private val _passwordFromApi = MutableLiveData<String>()
+    var passwordFromApi: LiveData<String> = _passwordFromApi
 
-//    private val _deviceIdFromApi = MutableLiveData<Int>()
-    var deviceIdFromApi: Int? = 0
+    private val _deviceIdFromApi = MutableLiveData<Int>()
+    var deviceIdFromApi: LiveData<Int> = _deviceIdFromApi
 
     fun getUser(email: String, password: String) {
         _isLoading.value = true
@@ -47,10 +48,10 @@ class LoginViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     if (response.body()?.status == "OK") {
                         _isSuccess.value = true
-                        idFromApi = response.body()?.userInfo?.id
-                        emailFromApi = response.body()?.userInfo?.email
-                        passwordFromApi = response.body()?.userInfo?.password
-                        deviceIdFromApi = response.body()?.userInfo?.deviceId
+                        _idFromApi.value = response.body()?.userInfo?.id
+                        _emailFromApi.value= response.body()?.userInfo?.email
+                        _passwordFromApi.value = response.body()?.userInfo?.password
+                        _deviceIdFromApi.value = response.body()?.userInfo?.deviceId
                         _snackbarText.value = Event("${response.body()?.message}")
                     } else {
                         _isSuccess.value = false

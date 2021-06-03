@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
-import id.develo.capstoneproject.MainActivity
+import id.develo.capstoneproject.ui.main.MainActivity
 import id.develo.capstoneproject.R
 import id.develo.capstoneproject.databinding.FragmentLoginBinding
 import id.develo.capstoneproject.utils.AppPreferences
-import kotlin.math.log
 
 
 class LoginFragment : Fragment() {
@@ -22,8 +21,7 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
 
-//    private lateinit var inputEmail: String
-//    private lateinit var inputPassword: String
+    private lateinit var snackbar: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +39,7 @@ class LoginFragment : Fragment() {
 
         launchSnackBar()
 
+        snackbar = "Login Success."
         moveToHomeIfSuccess()
 
         binding.btnLogin.setOnClickListener {
@@ -93,13 +92,20 @@ class LoginFragment : Fragment() {
                 // create session
                 if (!AppPreferences.isLogin) {
                     AppPreferences.isLogin = true
-                    AppPreferences.uId = loginViewModel.idFromApi!!
-                    AppPreferences.email = loginViewModel.emailFromApi.toString()
-                    AppPreferences.password = loginViewModel.passwordFromApi.toString()
+                    loginViewModel.idFromApi.observe(requireActivity(), {
+                        AppPreferences.uId = it
+                    })
+                    loginViewModel.emailFromApi.observe(requireActivity(), {
+                        AppPreferences.email = it
+                    })
+                    loginViewModel.passwordFromApi.observe(requireActivity(), {
+                        AppPreferences.password = it
+                    })
                 }
-                Intent(activity, MainActivity::class.java).also {
-                    startActivity(it)
-                }
+                val intentMain = Intent(activity, MainActivity::class.java)
+                intentMain.putExtra(MainActivity.SNACKBAR_TEXT, snackbar)
+                intentMain.putExtra(MainActivity.IS_LOGGED_IN, true)
+                startActivity(intentMain)
                 activity?.finish()
             }
         })
