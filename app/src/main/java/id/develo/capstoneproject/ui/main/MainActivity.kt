@@ -24,18 +24,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainDrivingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Launch a snackbar from login page
         if (intent.getBooleanExtra(IS_LOGGED_IN, false)) {
             onSnack()
         }
 
+        // Set progress bar if start button is clicked.
         setProgressBar()
+
+        moveToAbout()
 
         mainViewModel.isSuccess.observe(this, {
             if (it) {
@@ -44,8 +48,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
-        moveToAbout()
 
         binding.btnStart.setOnClickListener {
             if (AppPreferences.isLogin) {
@@ -101,10 +103,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(it)
             finish()
         }
-    }
-
-    private fun startDriving() {
-
     }
 
     private fun moveToAbout() {

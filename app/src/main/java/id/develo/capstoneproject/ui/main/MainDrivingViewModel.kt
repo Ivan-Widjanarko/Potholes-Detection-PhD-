@@ -10,10 +10,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class MainDrivingViewModel: ViewModel() {
 
     companion object {
-        const val TAG = "MainViewModel"
+        const val TAG = "Main&DrivingViewModel"
     }
 
     private var _isLoading = MutableLiveData<Boolean>()
