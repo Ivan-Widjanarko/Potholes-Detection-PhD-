@@ -48,7 +48,7 @@ def login(email, password):
         results = cursor.fetchall()
         conn.close()
         if results:
-            user_info = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3]}
+            user_info = {'id':results[0][0],'email':results[0][1],'password':results[0][2],'device_id':results[0][3], 'state':results[0][4]}
             messages = {"status": "OK", "message":  "Login Success.", "user_info": user_info}
             return jsonify(messages)
         else:
