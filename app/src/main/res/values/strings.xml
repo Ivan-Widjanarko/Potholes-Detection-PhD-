@@ -20,4 +20,10 @@
     <string name="stop_review"><![CDATA[Stop & Review]]></string>
     <string name="some_logs_here">Some logs Here</string>
 
+    <string name="text_street">Street Name</string>
+    <string name="text_category">Category</string>
+    <string name="results">Results</string>
+    <string name="coordinate">Coordinate</string>
+    <string name="time">Time</string>
+
 </resources>
