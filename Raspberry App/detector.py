@@ -22,20 +22,14 @@ class ObjectDetectorLite:
         self.interpreter.invoke()
         
         # get results
-        #print()
-        #print(self.interpreter.get_tensor(self.output_details[0]['index']))
-        #print(self.interpreter.get_tensor(self.output_details[0]['shape'][0]))
-        #print()
-        boxes = self.interpreter.get_tensor(self.output_details[0]['index'])
-        print()
-        print(boxes)
-        print(self.output_details)
-        print(self.interpreter.get_tensor)
+        acc = self.interpreter.get_tensor(self.output_details[0]['index'])
         
-        return boxes
+        # return results
+        return acc
         
     def get_input_size(self):
-            return self.size
+        # return input size
+        return self.size
         
         
         
