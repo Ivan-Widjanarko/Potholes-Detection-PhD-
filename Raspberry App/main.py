@@ -60,6 +60,32 @@ if __name__ == '__main__':
                 fig.canvas.get_tk_widget().update()
                 continue
             
+            if (state == 'upload'):
+                # Save image
+                im = Image.fromarray(image)
+                im.save("image.jpeg")
+                
+                # Store image to google cloud storage
+                gmt = time.gmtime()
+                timestamp = calendar.timegm(gmt)
+                img_url = upload_to_gstorage(bucket_name, str(device_id)+'_'+str(timestamp), "image.jpeg")
+                
+                # Store data to google cloud SQL via API
+                latitude = -6.363869
+                longitude = 106.823835
+                hole_size = 'Medium'
+                link = f'{root}/data/set/{device_id}/{latitude}/{longitude}/{hole_size}/{url_img}'
+                x = requests.post(link)
+                status = x.json()['message']
+                print(status)
+                if (status == 'Data added'):
+                    state = 'halt'
+                    count = 0
+                else:
+                    print('trying to re-upload')
+                    state = 'upload'
+                    continue
+            
             # Get image from camera
             stream = np.empty((480, 640, 3), dtype=np.uint8)
             camera.capture(stream, 'rgb')
@@ -80,27 +106,7 @@ if __name__ == '__main__':
                 elif (state == 'detected'):
                     print(count)
                     if (count > 2):
-                        # Save image
-                        im = Image.fromarray(image)
-                        im.save("image.jpeg")
-                        
-                        # Store image to google cloud storage
-                        gmt = time.gmtime()
-                        timestamp = calendar.timegm(gmt)
-                        img_url = upload_to_gstorage(bucket_name, str(device_id)+'_'+str(timestamp), "image.jpeg")
-                        
-                        # Store data to google cloud SQL via API
-                        #latitude = -6.363869
-                        #longitude = 106.823835
-                        #hole_size = 'Medium'
-                        #link = f'{root}/data/set/{device_id}/{latitude}/{longitude}/{hole_size}/{url_img}'
-                        #x = requests.post(link)
-                        #status = x.json()['message']
-                        #if (status == 'Data added'):
-                        state = 'halt'
-                        count = 0
-                        #else:
-                        #    state = 'reupload'
+                        state = 'upload'
                     else:
                         count += 1
                 elif (state == 'halt'):
