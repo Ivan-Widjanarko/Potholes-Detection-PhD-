@@ -95,6 +95,9 @@ class LoginFragment : Fragment() {
                     loginViewModel.idFromApi.observe(requireActivity(), {
                         AppPreferences.uId = it
                     })
+                    loginViewModel.deviceIdFromApi.observe(requireActivity(), {
+                        AppPreferences.deviceId = it
+                    })
                     loginViewModel.emailFromApi.observe(requireActivity(), {
                         AppPreferences.email = it
                     })

@@ -10,6 +10,7 @@ object AppPreferences {
 
     // SharedPreferences variables
     private val UID = Pair("uid", 0)
+    private val DEVICE_ID = Pair("device_id", 0)
     private val EMAIL = Pair("email", "")
     private val PASSWORD = Pair("password", "")
     private val IS_LOGIN = Pair("is_login", false)
@@ -36,6 +37,12 @@ object AppPreferences {
         get() = preferences.getInt(UID.first, UID.second)
         set(value) = preferences.edit {
             it.putInt(UID.first, value)
+        }
+
+    var deviceId: Int
+        get() = preferences.getInt(DEVICE_ID.first, DEVICE_ID.second)
+        set(value) = preferences.edit {
+            it.putInt(DEVICE_ID.first, value)
         }
 
     var email: String

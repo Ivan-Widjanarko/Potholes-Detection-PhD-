@@ -30,6 +30,7 @@ class DrivingActivity : AppCompatActivity() {
             if (it) {
                 Intent(this, ReportActivity::class.java).also { intent ->
                     startActivity(intent)
+                    finish()
                 }
             }
         })

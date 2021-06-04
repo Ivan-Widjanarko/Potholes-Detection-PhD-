@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.main.DrivingActivity" />
+        <activity android:name=".ui.report.ReportActivity" />
+        <activity android:name=".ui.report.ReportDetailActivity" />
     </application>
 
 </manifest>

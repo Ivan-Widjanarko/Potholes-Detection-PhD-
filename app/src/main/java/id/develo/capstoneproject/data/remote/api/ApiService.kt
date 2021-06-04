@@ -3,6 +3,7 @@ package id.develo.capstoneproject.data.remote.api
 import id.develo.capstoneproject.data.remote.response.GetUserResponse
 import id.develo.capstoneproject.data.remote.response.PostStatusResponse
 import id.develo.capstoneproject.data.remote.response.PostUserResponse
+import id.develo.capstoneproject.data.remote.response.ReportResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,5 +28,8 @@ interface ApiService {
     fun setUserState(
         @Path("id") id: Int,
         @Path("state") state: Int
-    ) : Call<PostStatusResponse>
+    ): Call<PostStatusResponse>
+
+    @GET("data/get/{device_id}")
+    fun getReport(@Path("device_id") deviceId: Int): Call<ReportResponse>
 }
