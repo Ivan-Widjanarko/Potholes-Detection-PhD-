@@ -13,7 +13,7 @@ class ObjectDetectorLite:
         input_shape = self.input_details[0]['shape']
         self.size = input_shape[:2] if len(input_shape) == 3 else input_shape[1:3]
 
-    def detect(self, image, threshold=0.1):
+    def detect(self, image):
         # Add a batch dimension
         frame = np.expand_dims(image, axis=0)
         

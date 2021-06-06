@@ -27,8 +27,8 @@ if __name__ == '__main__':
     
     # Setup variable
     root = 'https://pothole-detection-315702.et.r.appspot.com'
-    bucket_name ='storagedemo_1'
-    device_id = 999
+    bucket_name ='pothole-detection1'
+    device_id = 1
     state = 'detecting'
     counter = 0
     
@@ -68,15 +68,17 @@ if __name__ == '__main__':
                 # Store image to google cloud storage
                 gmt = time.gmtime()
                 timestamp = calendar.timegm(gmt)
-                img_url = upload_to_gstorage(bucket_name, str(device_id)+'_'+str(timestamp), "image.jpeg")
+                file_name = str(device_id)+'_'+str(timestamp)
+                img_url = upload_to_gstorage(bucket_name, file_name, "image.jpeg")
                 
                 # Store data to google cloud SQL via API
                 latitude = -6.363869
                 longitude = 106.823835
                 hole_size = 'Medium'
-                link = f'{root}/data/set/{device_id}/{latitude}/{longitude}/{hole_size}/{url_img}'
+                link = f'{root}/data/post/{device_id}/{latitude}/{longitude}/{hole_size}/{file_name}'
+                print(f'api link {link}')
                 x = requests.post(link)
-                status = x.json()['message']
+                status = x.text
                 print(status)
                 if (status == 'Data added'):
                     state = 'halt'
@@ -93,29 +95,25 @@ if __name__ == '__main__':
             
             # Detect an object
             image = image.astype('float32')
-            scores = detector.detect(image, args.confidence)
+            scores = detector.detect(image)
             image = image.astype('uint8')
             print(scores)
             
             # Check class and select state
             fig.suptitle(state)
-            if (scores > 0.75 ):
+            if (scores > 0.5 ):
                 if (state == 'detecting'):
                     state = 'detected'
                     count = 0
                 elif (state == 'detected'):
-                    print(count)
-                    if (count > 2):
-                        state = 'upload'
-                    else:
-                        count += 1
+                    state = 'upload'
                 elif (state == 'halt'):
                     count = 0
             else:
                 if (state == 'detected'):
                     state = 'detecting'
                 elif (state == 'halt'):
-                    if (count > 2):
+                    if (count > 0):
                         state = 'detecting'
                     else:
                         count += 1
