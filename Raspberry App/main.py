@@ -78,8 +78,7 @@ if __name__ == '__main__':
                 link = f'{root}/data/post/{device_id}/{latitude}/{longitude}/{hole_size}/{file_name}'
                 print(f'api link {link}')
                 x = requests.post(link)
-                status = x.text
-                print(status)
+                status = x.json()['message']
                 if (status == 'Data added'):
                     state = 'halt'
                     count = 0
