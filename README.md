@@ -17,6 +17,15 @@ A 2021 Bangkit Program project in the form of an Android application that connec
 
 <hr>
 
+## Branches
+
+<p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-"Main</a></p>
+<p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/tree/Machine-Learning">Machine Learning</a></p>
+<p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/tree/Android">Android</a></p>
+<p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/tree/cloud-computing">Cloud</a></p>
+
+<hr>
+
 ## Screenshots
 
 <hr>
