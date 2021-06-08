@@ -10,7 +10,6 @@ import id.develo.capstoneproject.databinding.ItemReportBinding
 class ReportAdapter(private val listReports: ArrayList<ReportEntity>) :
     RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
 
-
     inner class ReportViewHolder(private val binding: ItemReportBinding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(report: ReportEntity) {
@@ -18,7 +17,7 @@ class ReportAdapter(private val listReports: ArrayList<ReportEntity>) :
                     tvStreet.text = report.latitude.toString()
                     tvCategory.text = report.holeType
                     Glide.with(itemView.context)
-                        .load(report.urlImg)
+                        .load("https://storage.googleapis.com/pothole-detection1/" + report.urlImg)
                         .into(imgUser)
                 }
             }

@@ -1,6 +1,7 @@
 package id.develo.capstoneproject.ui.authentication
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,17 +57,27 @@ class RegisterFragment : Fragment() {
 
         val inputEmail = binding.tfEmail.editText?.text.toString()
         val inputPassword = binding.tfPassword.editText?.text.toString()
-        val inputDeviceId = binding.tfDeviceId.editText?.text.toString()
+
+        try {
+            val inputDeviceId = binding.tfDeviceId.editText?.text.toString().toInt()
+            registerViewModel.registerUser(
+                    inputEmail,
+                    inputPassword,
+                    inputDeviceId
+            )
+        } catch (e: NumberFormatException) {
+            binding.tfDeviceId.error = "This field must be numeric!"
+        }
 
 //        Log.d("TEST em", inputEmail)
 //        Log.d("TEST pa", inputPassword)
 //        Log.d("TEST id", inputDeviceId)
 
-        registerViewModel.registerUser(
-            inputEmail,
-            inputPassword,
-            inputDeviceId.toInt()
-        )
+//        registerViewModel.registerUser(
+//            inputEmail,
+//            inputPassword,
+//            inputDeviceId
+//        )
     }
 
     private fun launchSnackBar() {
