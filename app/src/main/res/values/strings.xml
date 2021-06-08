@@ -25,5 +25,6 @@
     <string name="results">Results</string>
     <string name="coordinate">Coordinate</string>
     <string name="time">Time</string>
+    <string name="send_to_jaki">Send To JAKI</string>
 
 </resources>
