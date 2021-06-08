@@ -1,5 +1,6 @@
 package id.develo.capstoneproject.ui.report
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,12 @@ class ReportAdapter(private val listReports: ArrayList<ReportEntity>) :
                     Glide.with(itemView.context)
                         .load("https://storage.googleapis.com/pothole-detection1/" + report.urlImg)
                         .into(imgUser)
+
+                    itemView.setOnClickListener {
+                        val intentDetail = Intent(itemView.context, ReportDetailActivity::class.java)
+                        intentDetail.putExtra(ReportDetailActivity.EXTRA_REPORT, report)
+                        itemView.context.startActivity(intentDetail)
+                    }
                 }
             }
     }

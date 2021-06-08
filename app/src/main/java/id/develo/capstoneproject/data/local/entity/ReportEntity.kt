@@ -1,7 +1,10 @@
 package id.develo.capstoneproject.data.local.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ReportEntity(
 
     @field:SerializedName("hole_type")
@@ -21,4 +24,4 @@ data class ReportEntity(
 
     @field:SerializedName("longitude")
     val longitude: Double
-)
+) : Parcelable
