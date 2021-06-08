@@ -1,8 +1,8 @@
 import os
 from flask import Flask, jsonify, flash
 import pymysql
-from gcloud import storage
-from oauth2client.service_account import ServiceAccountCredentials
+# from gcloud import storage
+# from oauth2client.service_account import ServiceAccountCredentials
 
 
 app = Flask(__name__)
