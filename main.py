@@ -1,6 +1,8 @@
 import os
 from flask import Flask, jsonify, flash
 import pymysql
+from gcloud import storage
+from oauth2client.service_account import ServiceAccountCredentials
 
 
 app = Flask(__name__)
@@ -37,6 +39,22 @@ def conf():
 @app.route('/')
 def main():
     return 'halo'
+
+#get raspi
+@app.route('/raspi/credential')
+def connect_to_gstorage():
+    return jsonify(
+        type="service_account",
+        project_id= "pothole-detection-315702",
+        private_key_id= "a1d3aef5ad5975f75f359657328273e159ee6e4e",
+        private_key= "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDWIRJGOR6q3SB8\ntoiTURguGyNP9567t0pTvcO5QMVVpDDi3et5hnZXhC07OtdjDzaN3gYbr9JPXi6P\nMXtsWBjcC1daETDNJrEkOv/ljFkGo8PKPXclSrHjjDPC7fEaFCScHoLXwKBJUvZG\nrCPBcRRpVKl/45tRm7WQPRJVJrVJ1D7UZAj1wgBFtNbDkivuJsIMC4HdgtDtWUP7\nz/mkXYXu61qwFUGjRBTGui0Dw+ui0ag8aY9BbyPcRs+cl6V+4b0dbpdPt9duwraA\n66Pqk7yVpLBdCShXvs1ow/tZfbNd4sKiA9X08WdCGPFD4Kb1Z/kvKMzwNQVjv12C\n7dD0aPSRAgMBAAECggEAAVkqoPU8c4hPlg7ILrVKA7BOuUguiwa3xG3jd50oIPFB\nuuFO2ZsLz7fuA6YhM7x6yXXmb/IxeX0hqevT18t44e8oWPwsDylOiuiG3U5+7lhw\nToEIk7GJYTdsHq7E3+HUloRn/9fJ/+wyeiDHW4Z3bG+zXtzIs5YuvykYnnSkm5cO\n7ZvZ6RErvw06BU2p+muNBoD5tVnjFeb/t6qNdNiubeAtuetng5VIA6VcTjKFK1fs\nJas5QniO8KRrJiP7T0SZZZGGlxjN2lz06E+WPYSXKSkXCW0ojMKTBBQtwPeHvRtl\nqFJa67Rr8V0ODKI/fcKtdMcyejodzPm3i1I1Y43M4QKBgQDyYcDen8DmCU/kSvZ6\nLcSFnvIopl4Yi0Z0HDJlf9EC1Txu+KgUHrROkB5aA0oXhzjnJwkLxm1opevruAa2\nivSE2G3Qgf2+GabbsHu/cw4T/wikkXadjxlVwUqFAsCUoedfzETTjDUOYMbqGP3w\n2IrFy8e0W3p7N1x8IJ360Bu+bQKBgQDiKPOyPpZPcsusqZrmOQZalTb+cOFzcpBc\nEyTyZWTYXSG6BvUuJVxT6AEt2RaNDu0GZz2ce/JhjMaMSFzARXTfP3fJT/a31ToV\nlP1ntd6RlTaZVFfUcyrGp498PshDJZCfzeFkY1qMtbCvrwsp6Dxk8NQd5qknEPns\nu8vhdJ+oNQKBgQCP+ZMIapq5yhRDxmeMgb03pgewL8q7B5gNBmbFNdxgs2tXe6rT\ncL2n4SG2VDfhq/gYDm7oKLD6tXxjI4gRTI8cjjcE4QJptnEQFFAdk+lr5VUr9CAi\nTUs+TjfGtLDSWS3IEN1dT+6AIOpnSfsl4mrkPTzeHGyv3l24eeN9hbrFLQKBgB83\nc9vIk8rHl6Fvj7fzaxMZwYuBXT0oNRDge5sRr8fFoyAgUbta4NGcFn2Tl29E/iaC\nHZj56szYN5epbVQEwksGYaxh4zYgsnHELO4hxmTl6bFkWPM0KlVdT4rgx5etGbdV\nHaVTqW3+rjKxwKK6MYvlSgIOko6X40dv7IZkKJ15AoGAdVxVYUc5Xe5RerTje7Wn\n3Adg+2imq7oYCHpkjWTKeFed/zDT4UKJQKd/FQIwDJXwZfjjNm/EcMSR3ZGpIwD2\ny5/RPKf8yNlKtJZ3Oe2gplxr5sthNQaD2++sjLmRTIkCmC3rmR/+PQhPmejuX0YZ\n1OA1XbEiYqzQm9elDf8y60o=\n-----END PRIVATE KEY-----\n",
+        client_email= "google-cloud-storage@pothole-detection-315702.iam.gserviceaccount.com",
+        client_id= "103162368217828849366",
+        auth_uri= "https://accounts.google.com/o/oauth2/auth",
+        token_uri= "https://oauth2.googleapis.com/token",
+        auth_provider_x509_cert_url= "https://www.googleapis.com/oauth2/v1/certs",
+        client_x509_cert_url= "https://www.googleapis.com/robot/v1/metadata/x509/google-cloud-storage%40pothole-detection-315702.iam.gserviceaccount.com"
+    )
 
 #user login
 @app.route('/user/login/<string:email>/<string:password>')
