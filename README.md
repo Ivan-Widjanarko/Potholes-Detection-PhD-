@@ -10,7 +10,7 @@ A 2021 Bangkit Program project in the form of an Android application that connec
 </p>
 
 <p align="center">
-<a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-#summary">Summary</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-#branches">Branches</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-#screenshots">Screenshots</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-#step-by-step-to-use-the-app">Steps</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-#links">Links</a>
+<a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/blob/main/README.md#summary">Summary</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/blob/main/README.md#branches">Branches</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/blob/main/README.md#screenshots">Screenshots</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/blob/main/README.md#step-by-step-to-use-the-app">Steps</a> • <a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/blob/main/README.md#links">Links</a>
   </p>
 
 <hr>
