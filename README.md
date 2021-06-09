@@ -42,6 +42,11 @@ A 2021 Bangkit Program project in the form of an Android application that connec
   <img src="https://drive.google.com/uc?export=view&id=1qiBH5FQcup1YGESZFJ_DM441Q9amkqzs" />
 </p>
 
+### Register Page
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=1_blBrcfN5_NCmdLdNnVxnFSeF-xMMDfC" />
+</p>
+
 ### Main Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=1OWJNLiP0cYyEtN4VZIHRyxBCsZqWkNz3" />
@@ -90,3 +95,4 @@ A 2021 Bangkit Program project in the form of an Android application that connec
 <p><a href="http://bit.ly/phd_video">Presentation Video</a></p>
 <p><a href="http://bit.ly/phd_project-brief">Project Brief</a></p>
 <p><a href="http://bit.ly/phd_go-to-market-proposal">Go-to-Market Proposal</a></p>
+<p><a href="http://bit.ly/phd_apk">Deployed APK</a></p>
