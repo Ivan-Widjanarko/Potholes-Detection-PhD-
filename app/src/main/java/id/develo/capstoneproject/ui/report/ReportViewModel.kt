@@ -29,13 +29,13 @@ class ReportViewModel: ViewModel() {
     val listReport: LiveData<List<ReportEntity>> = _listReport
 
     init {
-        getReportData(AppPreferences.deviceId)
+        getReportData(AppPreferences.uId)
     }
 
-    fun getReportData(deviceId: Int) {
+    fun getReportData(userId: Int) {
         _isLoading.value = true
 
-        val client = ApiConfig.getApiService().getReport(deviceId)
+        val client = ApiConfig.getApiService().getReport(userId)
         client.enqueue(object : Callback<ReportResponse> {
             override fun onResponse(
                 call: Call<ReportResponse>,

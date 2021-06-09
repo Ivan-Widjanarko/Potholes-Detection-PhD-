@@ -15,7 +15,7 @@ class ReportAdapter(private val listReports: ArrayList<ReportEntity>) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(report: ReportEntity) {
                 with(binding) {
-                    tvStreet.text = report.latitude.toString()
+                    tvStreet.text = "${report.latitude}, ${report.longitude}"
                     tvCategory.text = report.holeType
                     Glide.with(itemView.context)
                         .load("https://storage.googleapis.com/pothole-detection1/" + report.urlImg)
