@@ -19,7 +19,7 @@ A 2021 Bangkit Program project in the form of an Android application that connec
 
 ## Branches
 
-<p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-"Main</a></p>
+<p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-">Main</a></p>
 <p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/tree/Machine-Learning">Machine Learning</a></p>
 <p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/tree/Android">Android</a></p>
 <p><a href="https://github.com/Ivan-Widjanarko/Potholes-Detection-PhD-/tree/cloud-computing">Cloud</a></p>
@@ -30,7 +30,17 @@ A 2021 Bangkit Program project in the form of an Android application that connec
 
 <hr>
 
-## Step by Step Installing
+## Step by Step to Use the App
+<ul>
+  <li>Download and Open the App</li>
+  <li>Login / Register & Connect to Raspberry Pi</li>
+  <li>Click Start Driving Button in the App</li>
+  <li>Start Driving</li>
+  <li>Click Stop Button in the App</li>
+  <li>Verify the Potholes Image Taken</li>
+  <li>Send it to Database</li>
+  <li>Close the App</li>
+</ul>
 
 <hr>
 
