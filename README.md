@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://cdn.discordapp.com/attachments/845528113614290948/845587280034660385/PhD_2.png" />
+  <img src="https://drive.google.com/uc?export=view&id=1DFBs-ziDCuNutOGL6mGT17zIW9xV8_HY" />
 </p>
 
 <p align="center"><b>Potholes Detection (PhD)</b></p>
@@ -31,6 +31,41 @@ A 2021 Bangkit Program project in the form of an Android application that connec
 <hr>
 
 ## Screenshots
+
+### Splash Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=19oGieKjUwe-dZfDNs_ZNK7xoSRl5UeTq" />
+</p>
+
+### Login Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=1qiBH5FQcup1YGESZFJ_DM441Q9amkqzs" />
+</p>
+
+### Main Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=1OWJNLiP0cYyEtN4VZIHRyxBCsZqWkNz3" />
+</p>
+
+### Start Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=1gKAC-bcdCAfcIW_uYlrljeVf0jA0tcDl" />
+</p>
+
+### Stop Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=1jljUoi6kZmKG7ro7DFED1X1wRJs6AQp4" />
+</p>
+
+### Result Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=1hJQnX2CpBa7pYIg2taTBYgxVpdk3Pb9f" />
+</p>
+
+### About Screen
+<p align="left">
+  <img src="https://drive.google.com/uc?export=view&id=134icaEZIDP_25zf--oHG8-KvxyTvmToH" />
+</p>
 
 <hr>
 
