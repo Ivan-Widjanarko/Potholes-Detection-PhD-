@@ -1,8 +1,6 @@
 import os
 from flask import Flask, jsonify, flash
 import pymysql
-# from gcloud import storage
-# from oauth2client.service_account import ServiceAccountCredentials
 
 
 app = Flask(__name__)
@@ -35,10 +33,12 @@ def conf():
     except pymysql.MySQLError as e:
         print(e)
 
+	
 #main route
 @app.route('/')
 def main():
     return 'halo'
+
 
 #get raspi
 @app.route('/raspi/credential')
@@ -56,6 +56,7 @@ def connect_to_gstorage():
         client_x509_cert_url= "https://www.googleapis.com/robot/v1/metadata/x509/google-cloud-storage%40pothole-detection-315702.iam.gserviceaccount.com"
     )
 
+
 #user login
 @app.route('/user/login/<string:email>/<string:password>')
 def login(email, password):
@@ -71,6 +72,7 @@ def login(email, password):
             return jsonify(messages)
         else:
             return jsonify(status="bad",message="Wrong Email or Password")
+
 
 #user get status
 @app.route("/user/get/status/<int:device_id>")
@@ -107,33 +109,6 @@ def set_status(id, state):
         return jsonify(status="err", message="Failed to set state!")
 
 
-# for user in data.query.filter(User.id.in_(ids)).all():
-#     if current_user.id == user.id:
-#         continue
-
-#     if user.delete():
-#         data.append(
-#             {
-#                 "id": user.id,
-#                 "type": "delete",
-#                 "reverse": False,
-#                 "reverse_name": None,
-#                 "reverse_url": None
-#             }
-#         )
-
-
-# #post_user('/users/register/<string:email>/<string:password>/<int:device_id>')
-# @app.route('/users/register/<string:email>/<string:password>/<int:device_id>', methods=['POST'])
-# def post_user(email, password, device_id):
-#     conn = main()
-#     with conn.cursor() as cursor:
-#         sql = "INSERT INTO data_table (email, password, device_id) VALUES(%s, %s, %s)"
-#         val = (email, password, device_id)
-#         cursor.execute(sql, val) #masukin ke dalam table database
-#     conn.commit()
-#     conn.close()
-#     flash('Email kamu berhasil terdaftar')
 #user register
 @app.route('/user/register/<string:email>/<string:password>/<int:device_id>/<int:state>', methods=['POST'])
 def register_user(email, password, device_id, state):
@@ -178,6 +153,7 @@ def post_data(device_id, latitude, longitude, hole_type, url_img):
             return jsonify(message="Failed to upload data")
     except Exception as e:
         return jsonify(message="Failed to upload data")
+
 
 #get data report
 @app.route('/data/get/<int:user_id>')
