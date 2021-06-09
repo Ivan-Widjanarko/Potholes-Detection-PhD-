@@ -37,32 +37,32 @@ A 2021 Bangkit Program project in the form of an Android application that connec
   <img src="https://drive.google.com/uc?export=view&id=19oGieKjUwe-dZfDNs_ZNK7xoSRl5UeTq" />
 </p>
 
-### Login Screen
+### Login Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=1qiBH5FQcup1YGESZFJ_DM441Q9amkqzs" />
 </p>
 
-### Main Screen
+### Main Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=1OWJNLiP0cYyEtN4VZIHRyxBCsZqWkNz3" />
 </p>
 
-### Start Screen
+### Start Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=1gKAC-bcdCAfcIW_uYlrljeVf0jA0tcDl" />
 </p>
 
-### Stop Screen
+### Stop Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=1jljUoi6kZmKG7ro7DFED1X1wRJs6AQp4" />
 </p>
 
-### Result Screen
+### Result Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=1hJQnX2CpBa7pYIg2taTBYgxVpdk3Pb9f" />
 </p>
 
-### About Screen
+### About Page
 <p align="left">
   <img src="https://drive.google.com/uc?export=view&id=134icaEZIDP_25zf--oHG8-KvxyTvmToH" />
 </p>
