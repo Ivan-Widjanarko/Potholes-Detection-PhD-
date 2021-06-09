@@ -16,6 +16,6 @@ def upload_to_gstorage(bucket_name, blob_name, file_name):
 		print('your img link is:', link)
 		return(link)
 	except Exception as e:
-		print('error')
+		print('can\'t upload to cloud storage')
 		print(e) 	
-		return(e)
+		return('error')

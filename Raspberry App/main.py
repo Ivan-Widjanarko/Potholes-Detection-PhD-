@@ -49,17 +49,24 @@ if __name__ == '__main__':
     # Using camera
     with picamera.PiCamera() as camera:
         camera.resolution = (640, 480)
+        tim = time.time()
+        start = 0
         while True:
-            # Checking status from google cloud SQL via API
-            link = f'{root}/user/get/status/{device_id}'
-            x = requests.get(link)
-            start = x.json()['status']
+            # Get status from google cloud SQL via API
+            if (time.time() - tim > 5.0):
+                link = f'{root}/user/get/status/{device_id}'
+                x = requests.get(link)
+                start = x.json()['status']
+                tim = time.time()
+                
+            # Checking status
             if (start!=1):
                 fig.suptitle('stop')
                 preview.set_data([[0, 0, 0]])
                 fig.canvas.get_tk_widget().update()
                 continue
             
+            # Upload image to cloud storage and data to cloud SQL
             if (state == 'upload'):
                 # Save image
                 im = Image.fromarray(image)
@@ -71,20 +78,24 @@ if __name__ == '__main__':
                 file_name = str(device_id)+'_'+str(timestamp)
                 img_url = upload_to_gstorage(bucket_name, file_name, "image.jpeg")
                 
-                # Store data to google cloud SQL via API
-                latitude = -6.363869
-                longitude = 106.823835
-                hole_size = 'Medium'
-                link = f'{root}/data/post/{device_id}/{latitude}/{longitude}/{hole_size}/{file_name}'
-                print(f'api link {link}')
-                x = requests.post(link)
-                status = x.json()['message']
-                if (status == 'Data added'):
-                    state = 'halt'
-                    count = 0
+                if(img_url != 'error'):
+                    # Store data to google cloud SQL via API
+                    latitude = 6.363869
+                    longitude = 106.823835
+                    hole_size = 'Medium'
+                    link = f'{root}/data/post/{device_id}/{latitude}/{longitude}/{hole_size}/{file_name}'
+                    x = requests.post(link)
+                    status = x.json()['message']
+                    if (status == 'Data added'):
+                        print('upload successful')
+                        print(f'api link {link}')
+                        state = 'halt'
+                        count = 0
+                    else:
+                        print('problem with API or database, trying to re-upload')
+                        continue
                 else:
-                    print('trying to re-upload')
-                    state = 'upload'
+                    print('problem with Cloud Storage, trying to re-upload')
                     continue
             
             # Get image from camera
@@ -112,7 +123,7 @@ if __name__ == '__main__':
                 if (state == 'detected'):
                     state = 'detecting'
                 elif (state == 'halt'):
-                    if (count > 0):
+                    if (count > 1):
                         state = 'detecting'
                     else:
                         count += 1
