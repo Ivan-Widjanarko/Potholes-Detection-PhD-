@@ -14,7 +14,7 @@ runtime: python39
 #   script: auto
 
 env_variables:
-  CLOUD_SQL_USERNAME: phd_owner
-  CLOUD_SQL_PASSWORD: welcome123
-  CLOUD_SQL_DATABASE_NAME: phd_db
-  CLOUD_SQL_CONNECTION_NAME: pothole-detection-315702:asia-southeast2:pothole-detection1
+  CLOUD_SQL_USERNAME: [YOUR-USERNAME]
+  CLOUD_SQL_PASSWORD: [YOUR-PASSWORD]
+  CLOUD_SQL_DATABASE_NAME: [YOUR-DATABASE]
+  CLOUD_SQL_CONNECTION_NAME: [YOUR-CONN-NAME]
